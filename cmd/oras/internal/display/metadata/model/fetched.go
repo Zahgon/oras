@@ -24,8 +24,6 @@ type fetched struct {
 
 // NewFetched creates a new fetched metadata.
 func NewFetched(path string, desc ocispec.Descriptor, content any) any {
-	return &fetched{
-		Descriptor: FromDescriptor(path, desc),
-		Content:    content,
-	}
+	_ = "STUB: not implemented"
+	return *new(any)
 }

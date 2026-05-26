@@ -34,9 +34,7 @@ import (
 	"oras.land/oras/test/e2e/internal/utils/match"
 )
 
-func attachTestRepo(text string) string {
-	return fmt.Sprintf("command/attach/%d/%s", GinkgoRandomSeed(), text)
-}
+func attachTestRepo(text string) string { _ = "STUB: not implemented"; return "" }
 
 var _ = Describe("ORAS beginners:", func() {
 	When("running attach command", func() {

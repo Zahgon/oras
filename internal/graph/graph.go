@@ -17,15 +17,10 @@ package graph
 
 import (
 	"context"
-	"encoding/json"
-	"sync"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
-	"golang.org/x/sync/errgroup"
 	"oras.land/oras-go/v2"
 	"oras.land/oras-go/v2/content"
-	"oras.land/oras-go/v2/registry"
-	"oras.land/oras/internal/docker"
 )
 
 // MediaTypeArtifactManifest specifies the media type for a content descriptor.
@@ -60,114 +55,24 @@ type Artifact struct {
 // out subject and config descriptor if applicable.
 // Returning nil when no subject and config found.
 func Successors(ctx context.Context, fetcher content.Fetcher, node ocispec.Descriptor) (nodes []ocispec.Descriptor, subject, config *ocispec.Descriptor, err error) {
-	switch node.MediaType {
-	case docker.MediaTypeManifest, ocispec.MediaTypeImageManifest:
-		var fetched []byte
-		fetched, err = content.FetchAll(ctx, fetcher, node)
-		if err != nil {
-			return
-		}
-		var manifest ocispec.Manifest
-		if err = json.Unmarshal(fetched, &manifest); err != nil {
-			return
-		}
-		nodes = manifest.Layers
-		subject = manifest.Subject
-		config = &manifest.Config
-	case MediaTypeArtifactManifest:
-		var fetched []byte
-		fetched, err = content.FetchAll(ctx, fetcher, node)
-		if err != nil {
-			return
-		}
-		var manifest Artifact
-		if err = json.Unmarshal(fetched, &manifest); err != nil {
-			return
-		}
-		nodes = manifest.Blobs
-		subject = manifest.Subject
-	case ocispec.MediaTypeImageIndex:
-		var fetched []byte
-		fetched, err = content.FetchAll(ctx, fetcher, node)
-		if err != nil {
-			return
-		}
-		var index ocispec.Index
-		if err = json.Unmarshal(fetched, &index); err != nil {
-			return
-		}
-		nodes = index.Manifests
-		subject = index.Subject
-	default:
-		nodes, err = content.Successors(ctx, fetcher, node)
-	}
-	return
+	_ = "STUB: not implemented"
+	return nil, nil, nil, nil
 }
 
 // FindPredecessors returns all predecessors of descs in src concurrently.
 func FindPredecessors(ctx context.Context, src oras.ReadOnlyGraphTarget, descs []ocispec.Descriptor, opts oras.ExtendedCopyGraphOptions) ([]ocispec.Descriptor, error) {
-	var predecessors []ocispec.Descriptor
-	g, ctx := errgroup.WithContext(ctx)
-	var m sync.Mutex
-	if opts.Concurrency != 0 {
-		g.SetLimit(opts.Concurrency)
-	}
-	if opts.FindPredecessors == nil {
-		opts.FindPredecessors = func(ctx context.Context, src content.ReadOnlyGraphStorage, desc ocispec.Descriptor) ([]ocispec.Descriptor, error) {
-			return src.Predecessors(ctx, desc)
-		}
-	}
-	for _, desc := range descs {
-		g.Go(func(node ocispec.Descriptor) func() error {
-			return func() error {
-				descs, err := opts.FindPredecessors(ctx, src, node)
-				if err != nil {
-					return err
-				}
-				m.Lock()
-				defer m.Unlock()
-				predecessors = append(predecessors, descs...)
-				return nil
-			}
-		}(desc))
-	}
-	if err := g.Wait(); err != nil {
-		return nil, err
-	}
-	return predecessors, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // RecursiveFindReferrers finds all referrers of the given descriptors recursively.
 func RecursiveFindReferrers(ctx context.Context, src oras.ReadOnlyGraphTarget, descs []ocispec.Descriptor, opts oras.ExtendedCopyGraphOptions) ([]ocispec.Descriptor, error) {
-	if opts.FindPredecessors == nil {
-		opts.FindPredecessors = func(ctx context.Context, src content.ReadOnlyGraphStorage, desc ocispec.Descriptor) ([]ocispec.Descriptor, error) {
-			return registry.Referrers(ctx, src, desc, "")
-		}
-	}
-	var allReferrers []ocispec.Descriptor
-	for len(descs) > 0 {
-		referrers, err := FindPredecessors(ctx, src, descs, opts)
-		if err != nil {
-			return nil, err
-		}
-		allReferrers = append(allReferrers, referrers...)
-		descs = referrers
-	}
-	return allReferrers, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
 
 // FilteredSuccessors fetches successors and returns filtered ones.
 func FilteredSuccessors(ctx context.Context, desc ocispec.Descriptor, fetcher content.Fetcher, filter func(ocispec.Descriptor) bool) ([]ocispec.Descriptor, error) {
-	allSuccessors, err := content.Successors(ctx, fetcher, desc)
-	if err != nil {
-		return nil, err
-	}
-
-	var successors []ocispec.Descriptor
-	for _, s := range allSuccessors {
-		if filter(s) {
-			successors = append(successors, s)
-		}
-	}
-	return successors, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }

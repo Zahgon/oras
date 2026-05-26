@@ -30,17 +30,12 @@ type ResolveHandler struct {
 
 // NewResolveHandler returns a new handler for resolve events.
 func NewResolveHandler(printer *output.Printer, fullRef bool, path string) metadata.ResolveHandler {
-	return &ResolveHandler{
-		printer: printer,
-		fullRef: fullRef,
-		path:    path,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.ResolveHandler)
 }
 
 // OnResolved implements metadata.ResolveHandler.
 func (h *ResolveHandler) OnResolved(desc ocispec.Descriptor) error {
-	if h.fullRef {
-		return h.printer.Printf("%s@%s\n", h.path, desc.Digest)
-	}
-	return h.printer.Println(desc.Digest.String())
+	_ = "STUB: not implemented"
+	return nil
 }

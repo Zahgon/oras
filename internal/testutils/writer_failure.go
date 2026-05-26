@@ -15,28 +15,16 @@ limitations under the License.
 
 package testutils
 
-import "fmt"
-
 type WriteFailure struct {
 	count int
 	err   error
 }
 
-func NewWriteFailure(count int) *WriteFailure {
-	return &WriteFailure{
-		count: count,
-		err:   fmt.Errorf("failed on %d", count),
-	}
-}
+func NewWriteFailure(count int) *WriteFailure { _ = "STUB: not implemented"; return nil }
 
 func (wf *WriteFailure) Write(p []byte) (n int, err error) {
-	wf.count = wf.count - 1
-	if wf.count <= 0 {
-		return 0, wf.err
-	}
-	return len(p), nil
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
-func (wf *WriteFailure) Expected() string {
-	return wf.err.Error()
-}
+func (wf *WriteFailure) Expected() string { _ = "STUB: not implemented"; return "" }

@@ -16,10 +16,6 @@ limitations under the License.
 package option
 
 import (
-	"fmt"
-	"runtime"
-	"strings"
-
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
@@ -33,46 +29,13 @@ type Platform struct {
 }
 
 // ApplyFlags applies flags to a command flag set.
-func (opts *Platform) ApplyFlags(fs *pflag.FlagSet) {
-	if opts.FlagDescription == "" {
-		opts.FlagDescription = "request platform"
-	}
-	fs.StringVarP(&opts.platform, "platform", "", "", opts.FlagDescription+" in the form of `os[/arch][/variant][:os_version]`")
-}
+func (opts *Platform) ApplyFlags(fs *pflag.FlagSet) { _ = "STUB: not implemented"; return }
 
 // Parse parses the input platform flag to an oci platform type.
-func (opts *Platform) Parse(*cobra.Command) error {
-	if opts.platform == "" {
-		return nil
-	}
+func (opts *Platform) Parse(*cobra.Command) error { _ = "STUB: not implemented"; return nil }
 
-	// OS[/Arch[/Variant]][:OSVersion]
-	// If Arch is not provided, will use GOARCH instead
-	var platformStr string
-	var p ocispec.Platform
-	platformStr, p.OSVersion, _ = strings.Cut(opts.platform, ":")
-	parts := strings.Split(platformStr, "/")
-	switch len(parts) {
-	case 3:
-		p.Variant = parts[2]
-		fallthrough
-	case 2:
-		p.Architecture = parts[1]
-	case 1:
-		p.Architecture = runtime.GOARCH
-	default:
-		return fmt.Errorf("failed to parse platform %q: expected format os[/arch[/variant]]", opts.platform)
-	}
-	p.OS = parts[0]
-	if p.OS == "" {
-		return fmt.Errorf("invalid platform: OS cannot be empty")
-	}
-	if p.Architecture == "" {
-		return fmt.Errorf("invalid platform: Architecture cannot be empty")
-	}
-	opts.Platform = &p
-	return nil
-}
+// OS[/Arch[/Variant]][:OSVersion]
+// If Arch is not provided, will use GOARCH instead
 
 // ArtifactPlatform option struct.
 type ArtifactPlatform struct {
@@ -80,7 +43,4 @@ type ArtifactPlatform struct {
 }
 
 // ApplyFlags applies flags to a command flag set.
-func (opts *ArtifactPlatform) ApplyFlags(fs *pflag.FlagSet) {
-	opts.FlagDescription = "set artifact platform"
-	fs.StringVarP(&opts.platform, "artifact-platform", "", "", "[Experimental] "+opts.FlagDescription+" in the form of `os[/arch][/variant][:os_version]`")
-}
+func (opts *ArtifactPlatform) ApplyFlags(fs *pflag.FlagSet) { _ = "STUB: not implemented"; return }

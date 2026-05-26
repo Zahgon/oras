@@ -16,10 +16,6 @@ limitations under the License.
 package match
 
 import (
-	"fmt"
-	"strings"
-
-	"github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 )
@@ -36,65 +32,28 @@ type requestHeaderMatcher struct {
 // MatchCpRequestHeaders returns a request header matcher
 // with the given url prefix.
 func NewRequestHeaderMatcher(urlPrefix string, headers []string) requestHeaderMatcher {
-	return requestHeaderMatcher{urlPrefix, headers}
+	_ = "STUB: not implemented"
+	return *new(requestHeaderMatcher)
 }
 
 // Match matches got with wanted headers.
-func (r requestHeaderMatcher) Match(got *gbytes.Buffer) {
-	var missed []string
-
-	raw := string(got.Contents())
-	reqs := getRequestHeaders(getRequests(r.urlPrefix, raw))
-	for _, req := range reqs {
-		for _, h := range r.headers {
-			if !strings.Contains(req, h) {
-				missed = append(missed, h)
-			}
-		}
-	}
-
-	if len(missed) != 0 {
-		fmt.Printf("Headers missed: %v\n", missed)
-		ginkgo.Fail("failed to match all headers")
-	}
-}
+func (r requestHeaderMatcher) Match(got *gbytes.Buffer) { _ = "STUB: not implemented"; return }
 
 // getRequests parses raw debug output to a string slice
 // containing each request that match the given prefix.
 func getRequests(urlPrefix string, debugOutput string) []string {
-	reqs := strings.Split(debugOutput, "Request #")
-	Expect(len(reqs) > 0).To(BeTrue(), "should output requests in debug logs")
-	reqs = reqs[1:]
-	// trim the response content
-	for i, req := range reqs {
-		req = strings.Split(req, "Response #")[0]
-		reqs[i] = req
-	}
-	if urlPrefix == "" {
-		return reqs
-	}
-	// filter with the url prefix
-	filteredReqs := []string{}
-	for _, req := range reqs {
-		// extract request url to match the prefix
-		_, rest, ok := strings.Cut(req, urlPrefix)
-		if ok {
-			filteredReqs = append(filteredReqs, rest)
-		}
-	}
-	return filteredReqs
+	_ = "STUB: not implemented"
+	return nil
 }
+
+// trim the response content
+
+// filter with the url prefix
+
+// extract request url to match the prefix
 
 // getRequestHeaders takes a string slice containing requests
 // and extract request headers from them.
-func getRequestHeaders(reqs []string) []string {
-	headers := make([]string, len(reqs))
-	for i, req := range reqs {
-		// extract the header content from each request
-		_, header, ok := strings.Cut(req, "> Request headers:\n")
-		if ok {
-			headers[i] = header
-		}
-	}
-	return headers
-}
+func getRequestHeaders(reqs []string) []string { _ = "STUB: not implemented"; return nil }
+
+// extract the header content from each request

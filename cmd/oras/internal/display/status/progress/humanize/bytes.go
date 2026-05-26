@@ -15,11 +15,6 @@ limitations under the License.
 
 package humanize
 
-import (
-	"fmt"
-	"math"
-)
-
 const base = 1024.0
 
 var units = []string{"B", "KB", "MB", "GB", "TB"}
@@ -30,31 +25,12 @@ type Bytes struct {
 }
 
 // ToBytes converts size in bytes to human readable format.
-func ToBytes(sizeInBytes int64) Bytes {
-	f := float64(sizeInBytes)
-	if f < base {
-		return Bytes{f, units[0]}
-	}
-	e := int(math.Floor(math.Log(f) / math.Log(base)))
-	if e >= len(units) {
-		// only support up to TB
-		e = len(units) - 1
-	}
-	p := f / math.Pow(base, float64(e))
-	return Bytes{RoundTo(p), units[e]}
-}
+func ToBytes(sizeInBytes int64) Bytes { _ = "STUB: not implemented"; return *new(Bytes) }
+
+// only support up to TB
 
 // String returns the string representation of Bytes.
-func (b Bytes) String() string {
-	return fmt.Sprintf("%g %2s", b.Size, b.Unit)
-}
+func (b Bytes) String() string { _ = "STUB: not implemented"; return "" }
 
 // RoundTo makes length of the size string to less than or equal to 4.
-func RoundTo(size float64) float64 {
-	if size < 10 {
-		return math.Round(size*100) / 100
-	} else if size < 100 {
-		return math.Round(size*10) / 10
-	}
-	return math.Round(size)
-}
+func RoundTo(size float64) float64 { _ = "STUB: not implemented"; return 0 }

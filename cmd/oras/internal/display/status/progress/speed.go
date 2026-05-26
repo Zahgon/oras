@@ -29,33 +29,15 @@ type speedWindow struct {
 }
 
 // newSpeedWindow creates a new speed window with a given capacity.
-func newSpeedWindow(capacity int) *speedWindow {
-	return &speedWindow{
-		point: make([]speedPoint, capacity),
-	}
-}
+func newSpeedWindow(capacity int) *speedWindow { _ = "STUB: not implemented"; return nil }
 
 // Add adds a done workload to the window.
-func (w *speedWindow) Add(time time.Time, offset int64) {
-	if w.size != len(w.point) {
-		w.size++
-	}
-	w.point[w.next] = speedPoint{
-		time:   time,
-		offset: offset,
-	}
-	w.next = (w.next + 1) % len(w.point)
-}
+func (w *speedWindow) Add(time time.Time, offset int64) { _ = "STUB: not implemented"; return }
 
 // Mean returns the mean speed of the window with unit of byte per second.
 func (w *speedWindow) Mean() float64 {
-	if w.size < 2 {
-		// no speed displayed for first read
-		return 0
-	}
+	_ = "STUB: not implemented"
 
-	begin := (w.next - w.size + len(w.point)) % len(w.point)
-	end := (begin - 1 + w.size) % w.size
-
-	return float64(w.point[end].offset-w.point[begin].offset) / w.point[end].time.Sub(w.point[begin].time).Seconds()
+	// no speed displayed for first read
+	return 0
 }

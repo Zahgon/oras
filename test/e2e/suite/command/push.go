@@ -162,9 +162,7 @@ var _ = Describe("ORAS beginners:", func() {
 	})
 })
 
-func pushTestRepo(text string) string {
-	return fmt.Sprintf("command/push/%d/%s", GinkgoRandomSeed(), text)
-}
+func pushTestRepo(text string) string { _ = "STUB: not implemented"; return "" }
 
 var _ = Describe("Remote registry users:", func() {
 	tag := "e2e"

@@ -16,13 +16,10 @@ limitations under the License.
 package template
 
 import (
-	"encoding/json"
 	"io"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"oras.land/oras/cmd/oras/internal/display/metadata"
-	"oras.land/oras/cmd/oras/internal/display/metadata/model"
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // manifestFetchHandler handles JSON metadata output for manifest fetch events.
@@ -33,17 +30,12 @@ type manifestFetchHandler struct {
 
 // NewManifestFetchHandler creates a new handler for manifest fetch events.
 func NewManifestFetchHandler(out io.Writer, template string) metadata.ManifestFetchHandler {
-	return &manifestFetchHandler{
-		template: template,
-		out:      out,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.ManifestFetchHandler)
 }
 
 // OnFetched is called after the manifest fetch is completed.
 func (h *manifestFetchHandler) OnFetched(path string, desc ocispec.Descriptor, content []byte) error {
-	var manifest map[string]any
-	if err := json.Unmarshal(content, &manifest); err != nil {
-		manifest = nil
-	}
-	return output.ParseAndWrite(h.out, model.NewFetched(path, desc, manifest), h.template)
+	_ = "STUB: not implemented"
+	return nil
 }

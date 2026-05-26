@@ -20,14 +20,4 @@ import "time"
 // FormatDuration formats a duration into a human-readable string.
 // It rounds the duration to the nearest second, millisecond, or microsecond
 // depending on its value.
-func FormatDuration(d time.Duration) string {
-	switch {
-	case d > time.Second:
-		d = d.Round(time.Second)
-	case d > time.Millisecond:
-		d = d.Round(time.Millisecond)
-	default:
-		d = d.Round(time.Microsecond)
-	}
-	return d.String()
-}
+func FormatDuration(d time.Duration) string { _ = "STUB: not implemented"; return "" }

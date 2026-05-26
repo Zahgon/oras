@@ -29,18 +29,12 @@ type ManifestDeleteHandler struct {
 
 // NewManifestDeleteHandler returns a new handler for manifest delete events.
 func NewManifestDeleteHandler(printer *output.Printer, target *option.Target) metadata.ManifestDeleteHandler {
-	return &ManifestDeleteHandler{
-		printer: printer,
-		target:  target,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.ManifestDeleteHandler)
 }
 
 // OnManifestMissing implements ManifestDeleteHandler.
-func (h *ManifestDeleteHandler) OnManifestMissing() error {
-	return h.printer.Println("Missing", h.target.RawReference)
-}
+func (h *ManifestDeleteHandler) OnManifestMissing() error { _ = "STUB: not implemented"; return nil }
 
 // OnManifestDeleted implements ManifestDeleteHandler.
-func (h *ManifestDeleteHandler) OnManifestDeleted() error {
-	return h.printer.Println("Deleted", h.target.GetDisplayReference())
-}
+func (h *ManifestDeleteHandler) OnManifestDeleted() error { _ = "STUB: not implemented"; return nil }

@@ -16,11 +16,9 @@ limitations under the License.
 package text
 
 import (
-	"strings"
 	"time"
 
 	"oras.land/oras/cmd/oras/internal/display/metadata"
-	"oras.land/oras/cmd/oras/internal/display/status/progress/humanize"
 	"oras.land/oras/cmd/oras/internal/output"
 )
 
@@ -32,55 +30,38 @@ type BackupHandler struct {
 
 // NewBackupHandler returns a new handler for backup events.
 func NewBackupHandler(repo string, printer *output.Printer) metadata.BackupHandler {
-	return &BackupHandler{
-		repo:    repo,
-		printer: printer,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.BackupHandler)
 }
 
 // OnBackupCompleted implements metadata.BackupHandler.
 func (bh *BackupHandler) OnBackupCompleted(tagsCount int, path string, duration time.Duration) error {
-	return bh.printer.Printf("Successfully backed up %d tag(s) from %q to %q in %s.\n", tagsCount, bh.repo, path, humanize.FormatDuration(duration))
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // OnTarExported implements metadata.BackupHandler.
 func (bh *BackupHandler) OnTarExported(path string, size int64) error {
-	return bh.printer.Printf("Exported to %s (%s)\n", path, humanize.ToBytes(size))
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // OnTarExporting implements metadata.BackupHandler.
-func (bh *BackupHandler) OnTarExporting(path string) error {
-	return bh.printer.Printf("Exporting to %s\n", path)
-}
+func (bh *BackupHandler) OnTarExporting(path string) error { _ = "STUB: not implemented"; return nil }
 
 // OnArtifactPulled implements metadata.BackupHandler.
 func (bh *BackupHandler) OnArtifactPulled(tag string, referrerCount int) error {
+	_ = "STUB: not implemented"
 	// represent duration in a human-readable format
-	return bh.printer.Printf("Pulled tag %s with %d referrer(s)\n", tag, referrerCount)
+	return nil
 }
 
 // OnTagsFound implements metadata.BackupHandler.
-func (bh *BackupHandler) OnTagsFound(tags []string) error {
-	if len(tags) == 0 {
-		return bh.printer.Printf("No tags found in %s\n", bh.repo)
-	}
-	if len(tags) <= 5 {
-		// print small number of tags in one line
-		return bh.printer.Printf("Found %d tag(s) in %s: %s\n", len(tags), bh.repo, strings.Join(tags, ", "))
-	}
-	// print large number of tags line by line
-	if err := bh.printer.Printf("Found %d tag(s) in %s:\n", len(tags), bh.repo); err != nil {
-		return err
-	}
-	for _, tag := range tags {
-		if err := bh.printer.Println(tag); err != nil {
-			return err
-		}
-	}
-	return nil
-}
+func (bh *BackupHandler) OnTagsFound(tags []string) error { _ = "STUB: not implemented"; return nil }
+
+// print small number of tags in one line
+
+// print large number of tags line by line
 
 // Render implements metadata.BackupHandler.
-func (bh *BackupHandler) Render() error {
-	return nil
-}
+func (bh *BackupHandler) Render() error { _ = "STUB: not implemented"; return nil }

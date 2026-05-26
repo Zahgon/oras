@@ -17,13 +17,10 @@ limitations under the License.
 package mock
 
 import (
-	"bytes"
 	"context"
 	"errors"
-	"fmt"
 	"io"
 
-	"github.com/opencontainers/go-digest"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"oras.land/oras-go/v2/registry/remote"
 )
@@ -42,27 +39,16 @@ type Repository struct {
 }
 
 // WithFetch enables mocking for Fetch.
-func (repo *Repository) WithFetch() *Repository {
-	repo.isFetcher = true
-	return repo
-}
+func (repo *Repository) WithFetch() *Repository { _ = "STUB: not implemented"; return nil }
 
 // WithFetchReference enables mocking for FetchReference.
-func (repo *Repository) WithFetchReference() *Repository {
-	repo.isReferenceFetcher = true
-	return repo
-}
+func (repo *Repository) WithFetchReference() *Repository { _ = "STUB: not implemented"; return nil }
 
 // WithResolve enables mocking for Resolve.
-func (repo *Repository) WithResolve() *Repository {
-	repo.isResolver = true
-	return repo
-}
+func (repo *Repository) WithResolve() *Repository { _ = "STUB: not implemented"; return nil }
 
 // New returns a new Repository struct.
-func New() *Repository {
-	return &Repository{}
-}
+func New() *Repository { _ = "STUB: not implemented"; return nil }
 
 // Blob mocks a content blob stored in content-addressable storage.
 type Blob struct {
@@ -72,56 +58,24 @@ type Blob struct {
 }
 
 // Remount remounts the underlying CAS of the Repository.
-func (repo *Repository) Remount(blobs []Blob) {
-	repo.cas = make(map[string]content)
-	for _, blob := range blobs {
-		bytes := []byte(blob.Content)
-		desc := ocispec.Descriptor{
-			MediaType: blob.MediaType,
-			Digest:    digest.FromBytes(bytes),
-			Size:      int64(len(bytes)),
-		}
-		repo.cas[string(desc.Digest)] = content{desc, bytes}
-		if blob.Tag != "" {
-			repo.cas[blob.Tag] = content{desc, bytes}
-		}
-	}
-}
+func (repo *Repository) Remount(blobs []Blob) { _ = "STUB: not implemented"; return }
 
 var errNotImplemented = errors.New("not implemented")
 
 // FetchReference mocks the fetching via a reference ref.
 func (repo *Repository) FetchReference(_ context.Context, ref string) (ocispec.Descriptor, io.ReadCloser, error) {
-	if !repo.isReferenceFetcher {
-		return ocispec.Descriptor{}, nil, errNotImplemented
-	}
-
-	if c, ok := repo.cas[ref]; ok {
-		return c.Descriptor, io.NopCloser(bytes.NewReader(c.blob)), nil
-	}
-	return ocispec.Descriptor{}, nil, fmt.Errorf("got unexpected reference %q", ref)
+	_ = "STUB: not implemented"
+	return *new(ocispec.Descriptor), *new(io.ReadCloser), nil
 }
 
 // Fetch mocks fetching the target descriptor.
 func (repo *Repository) Fetch(_ context.Context, target ocispec.Descriptor) (io.ReadCloser, error) {
-	if !repo.isFetcher {
-		return nil, errNotImplemented
-	}
-
-	if r, ok := repo.cas[target.Digest.String()]; ok {
-		return io.NopCloser(bytes.NewReader(r.blob)), nil
-	}
-	return nil, fmt.Errorf("unexpected descriptor %v", target)
+	_ = "STUB: not implemented"
+	return *new(io.ReadCloser), nil
 }
 
 // Resolve mocks resolving via a reference.
 func (repo *Repository) Resolve(_ context.Context, reference string) (ocispec.Descriptor, error) {
-	if !repo.isResolver {
-		return ocispec.Descriptor{}, errNotImplemented
-	}
-
-	if r, ok := repo.cas[reference]; ok {
-		return r.Descriptor, nil
-	}
-	return ocispec.Descriptor{}, fmt.Errorf("unexpected reference %v", reference)
+	_ = "STUB: not implemented"
+	return *new(ocispec.Descriptor), nil
 }

@@ -19,7 +19,6 @@ import (
 	"os"
 
 	containerd "github.com/containerd/console"
-	"github.com/morikuni/aec"
 )
 
 const (
@@ -48,55 +47,24 @@ type console struct {
 }
 
 // NewConsole generates a console from a file.
-func NewConsole(f *os.File) (Console, error) {
-	c, err := containerd.ConsoleFromFile(f)
-	if err != nil {
-		return nil, err
-	}
-	return &console{c}, nil
-}
+func NewConsole(f *os.File) (Console, error) { _ = "STUB: not implemented"; return *new(Console), nil }
 
 // GetHeightWidth returns the width and height of the console.
 // If the console size cannot be determined, returns a default value of 80x10.
-func (c *console) GetHeightWidth() (height, width int) {
-	windowSize, err := c.Size()
-	if err != nil {
-		return MinHeight, MinWidth
-	}
-	if windowSize.Height < MinHeight {
-		windowSize.Height = MinHeight
-	}
-	if windowSize.Width < MinWidth {
-		windowSize.Width = MinWidth
-	}
-	return int(windowSize.Height), int(windowSize.Width)
-}
+func (c *console) GetHeightWidth() (height, width int) { _ = "STUB: not implemented"; return 0, 0 }
 
 // Save saves the current cursor position.
-func (c *console) Save() {
-	_, _ = c.Write([]byte(aec.Hide.Apply(Save)))
-}
+func (c *console) Save() { _ = "STUB: not implemented"; return }
 
 // NewRow allocates a horizontal space to the output area with scroll if needed.
-func (c *console) NewRow() {
-	_, _ = c.Write([]byte(Restore))
-	_, _ = c.Write([]byte("\n"))
-	_, _ = c.Write([]byte(Save))
-}
+func (c *console) NewRow() { _ = "STUB: not implemented"; return }
 
 // OutputTo outputs a string to a specific line.
-func (c *console) OutputTo(upCnt uint, str string) {
-	_, _ = c.Write([]byte(Restore))
-	_, _ = c.Write([]byte(aec.PreviousLine(upCnt).Apply(str)))
-	_, _ = c.Write([]byte("\n"))
-	_, _ = c.Write([]byte(aec.EraseLine(aec.EraseModes.Tail).String()))
-}
+func (c *console) OutputTo(upCnt uint, str string) { _ = "STUB: not implemented"; return }
 
 // Restore restores the saved cursor position.
 func (c *console) Restore() {
+	_ = "STUB: not implemented"
 	// cannot use aec.Restore since DEC has better compatibility than SCO
-	_, _ = c.Write([]byte(Restore))
-	_, _ = c.Write([]byte(aec.Column(0).
-		With(aec.EraseLine(aec.EraseModes.All)).
-		With(aec.Show).String()))
+	return
 }

@@ -20,7 +20,6 @@ import (
 
 	"oras.land/oras/cmd/oras/internal/display/metadata"
 	"oras.land/oras/cmd/oras/internal/display/metadata/model"
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // repoListHandler handles JSON metadata output for repo ls command.
@@ -31,20 +30,16 @@ type repoListHandler struct {
 
 // NewRepoListHandler creates a new handler for repo ls events.
 func NewRepoListHandler(out io.Writer, registry string) metadata.RepoListHandler {
-	return &repoListHandler{
-		out:   out,
-		model: model.NewRepositories(registry),
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.RepoListHandler)
 }
 
 // OnRepositoryListed implements metadata.RepoListHandler.
 func (h *repoListHandler) OnRepositoryListed(repo string) error {
+	_ = "STUB: not implemented"
 	// For JSON format, show the full repository name
-	h.model.AddRepository(repo)
 	return nil
 }
 
 // Render implements metadata.RepoListHandler.
-func (h *repoListHandler) Render() error {
-	return output.PrintPrettyJSON(h.out, h.model)
-}
+func (h *repoListHandler) Render() error { _ = "STUB: not implemented"; return nil }

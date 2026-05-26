@@ -19,7 +19,6 @@ import (
 	"io"
 
 	"github.com/spf13/pflag"
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // Pretty option struct.
@@ -28,12 +27,11 @@ type Pretty struct {
 }
 
 // ApplyFlags applies flags to a command flag set.
-func (opts *Pretty) ApplyFlags(fs *pflag.FlagSet) {
-	fs.BoolVarP(&opts.Pretty, "pretty", "", false, "prettify JSON objects printed to stdout")
-}
+func (opts *Pretty) ApplyFlags(fs *pflag.FlagSet) { _ = "STUB: not implemented"; return }
 
 // Output outputs the prettified content if `--pretty` flag is used. Otherwise
 // outputs the original content.
 func (opts *Pretty) Output(w io.Writer, content []byte) error {
-	return output.PrintJSON(w, content, opts.Pretty)
+	_ = "STUB: not implemented"
+	return nil
 }

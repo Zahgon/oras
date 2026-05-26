@@ -20,9 +20,7 @@ import (
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"oras.land/oras/cmd/oras/internal/display/metadata"
-	"oras.land/oras/cmd/oras/internal/display/metadata/model"
 	"oras.land/oras/cmd/oras/internal/option"
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // AttachHandler handles go-template metadata output for attach events.
@@ -35,19 +33,15 @@ type AttachHandler struct {
 
 // NewAttachHandler returns a new handler for attach metadata events.
 func NewAttachHandler(out io.Writer, template string) metadata.AttachHandler {
-	return &AttachHandler{
-		out:      out,
-		template: template,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.AttachHandler)
 }
 
 // OnAttached implements AttachHandler.
 func (ah *AttachHandler) OnAttached(target *option.Target, root ocispec.Descriptor, _ ocispec.Descriptor) {
-	ah.path = target.Path
-	ah.root = root
+	_ = "STUB: not implemented"
+	return
 }
 
 // Render formats the metadata of attach command.
-func (ah *AttachHandler) Render() error {
-	return output.ParseAndWrite(ah.out, model.NewAttach(ah.root, ah.path), ah.template)
-}
+func (ah *AttachHandler) Render() error { _ = "STUB: not implemented"; return nil }

@@ -21,7 +21,6 @@ import (
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"oras.land/oras/cmd/oras/internal/display/metadata"
 	"oras.land/oras/cmd/oras/internal/display/metadata/model"
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // discoverHandler handles json metadata output for discover events.
@@ -34,20 +33,15 @@ type discoverHandler struct {
 
 // NewDiscoverHandler creates a new handler for discover events.
 func NewDiscoverHandler(out io.Writer, root ocispec.Descriptor, path string, template string) metadata.DiscoverHandler {
-	return &discoverHandler{
-		out:      out,
-		path:     path,
-		template: template,
-		model:    model.NewDiscover(path, root),
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.DiscoverHandler)
 }
 
 // OnDiscovered implements metadata.DiscoverHandler.
 func (h *discoverHandler) OnDiscovered(referrer, subject ocispec.Descriptor) error {
-	return h.model.AddReferrer(referrer, subject)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Render implements metadata.DiscoverHandler.
-func (h *discoverHandler) Render() error {
-	return output.ParseAndWrite(h.out, h.model.Root, h.template)
-}
+func (h *discoverHandler) Render() error { _ = "STUB: not implemented"; return nil }

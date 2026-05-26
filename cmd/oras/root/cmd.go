@@ -17,32 +17,6 @@ package root
 
 import (
 	"github.com/spf13/cobra"
-	"oras.land/oras/cmd/oras/root/blob"
-	"oras.land/oras/cmd/oras/root/manifest"
-	"oras.land/oras/cmd/oras/root/repo"
 )
 
-func New() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:          "oras [command]",
-		SilenceUsage: true,
-	}
-	cmd.AddCommand(
-		pullCmd(),
-		pushCmd(),
-		loginCmd(),
-		logoutCmd(),
-		versionCmd(),
-		discoverCmd(),
-		resolveCmd(),
-		copyCmd(),
-		tagCmd(),
-		attachCmd(),
-		backupCmd(),
-		restoreCmd(),
-		blob.Cmd(),
-		manifest.Cmd(),
-		repo.Cmd(),
-	)
-	return cmd
-}
+func New() *cobra.Command { _ = "STUB: not implemented"; return nil }

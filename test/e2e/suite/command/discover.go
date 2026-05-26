@@ -18,14 +18,12 @@ package command
 import (
 	"encoding/json"
 	"regexp"
-	"strings"
 
 	. "github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gbytes"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
-	"go.yaml.in/yaml/v4"
 	"oras.land/oras/test/e2e/internal/testdata/feature"
 	"oras.land/oras/test/e2e/internal/testdata/foobar"
 	"oras.land/oras/test/e2e/internal/testdata/multi_arch"
@@ -33,18 +31,8 @@ import (
 )
 
 func discoverKeyWords(verbose bool, descs ...ocispec.Descriptor) []string {
-	var ret []string
-	for _, d := range descs {
-		ret = append(ret, d.Digest.String(), d.ArtifactType)
-		if verbose {
-			for k, v := range d.Annotations {
-				bytes, err := yaml.Marshal(map[string]string{k: v})
-				Expect(err).ShouldNot(HaveOccurred())
-				ret = append(ret, strings.TrimSpace(string(bytes)))
-			}
-		}
-	}
-	return ret
+	_ = "STUB: not implemented"
+	return nil
 }
 
 var _ = Describe("ORAS beginners:", func() {

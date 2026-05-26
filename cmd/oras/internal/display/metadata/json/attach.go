@@ -20,9 +20,7 @@ import (
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"oras.land/oras/cmd/oras/internal/display/metadata"
-	"oras.land/oras/cmd/oras/internal/display/metadata/model"
 	"oras.land/oras/cmd/oras/internal/option"
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // AttachHandler handles json metadata output for attach events.
@@ -34,18 +32,15 @@ type AttachHandler struct {
 
 // NewAttachHandler creates a new handler for attach events.
 func NewAttachHandler(out io.Writer) metadata.AttachHandler {
-	return &AttachHandler{
-		out: out,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.AttachHandler)
 }
 
 // OnAttached implements AttachHandler.
 func (ah *AttachHandler) OnAttached(target *option.Target, root ocispec.Descriptor, _ ocispec.Descriptor) {
-	ah.path = target.Path
-	ah.root = root
+	_ = "STUB: not implemented"
+	return
 }
 
 // Render is called when the attach command is completed.
-func (ah *AttachHandler) Render() error {
-	return output.PrintPrettyJSON(ah.out, model.NewAttach(ah.root, ah.path))
-}
+func (ah *AttachHandler) Render() error { _ = "STUB: not implemented"; return nil }

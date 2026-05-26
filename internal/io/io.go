@@ -16,30 +16,8 @@ limitations under the License.
 package io
 
 import (
-	"bytes"
 	"io"
 )
 
 // ReadLine reads a line from the reader with trailing \r dropped.
-func ReadLine(reader io.Reader) ([]byte, error) {
-	var line []byte
-	var buffer [1]byte
-	for {
-		n, err := reader.Read(buffer[:])
-		if err != nil {
-			if err == io.EOF {
-				break
-			}
-			return nil, err
-		}
-		if n == 0 {
-			continue
-		}
-		c := buffer[0]
-		if c == '\n' {
-			break
-		}
-		line = append(line, c)
-	}
-	return bytes.TrimSuffix(line, []byte{'\r'}), nil
-}
+func ReadLine(reader io.Reader) ([]byte, error) { _ = "STUB: not implemented"; return nil, nil }

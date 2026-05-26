@@ -28,8 +28,4 @@ type FlagApplier interface {
 // target flag set.
 // NOTE: The option argument need to be a pointer to the options, so its value
 // becomes addressable.
-func ApplyFlags(optsPtr any, target *pflag.FlagSet) {
-	for applier := range fields[FlagApplier](optsPtr) {
-		applier.ApplyFlags(target)
-	}
-}
+func ApplyFlags(optsPtr any, target *pflag.FlagSet) { _ = "STUB: not implemented"; return }

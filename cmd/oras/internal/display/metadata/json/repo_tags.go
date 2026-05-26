@@ -20,7 +20,6 @@ import (
 
 	"oras.land/oras/cmd/oras/internal/display/metadata"
 	"oras.land/oras/cmd/oras/internal/display/metadata/model"
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // repoTagsHandler handles JSON metadata output for repo tags command.
@@ -31,19 +30,12 @@ type repoTagsHandler struct {
 
 // NewRepoTagsHandler creates a new handler for repo tags events.
 func NewRepoTagsHandler(out io.Writer) metadata.RepoTagsHandler {
-	return &repoTagsHandler{
-		out:   out,
-		model: model.NewTags(),
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.RepoTagsHandler)
 }
 
 // OnTagListed implements metadata.TagsHandler.
-func (h *repoTagsHandler) OnTagListed(tag string) error {
-	h.model.AddTag(tag)
-	return nil
-}
+func (h *repoTagsHandler) OnTagListed(tag string) error { _ = "STUB: not implemented"; return nil }
 
 // Render implements metadata.TagsHandler.
-func (h *repoTagsHandler) Render() error {
-	return output.PrintPrettyJSON(h.out, h.model)
-}
+func (h *repoTagsHandler) Render() error { _ = "STUB: not implemented"; return nil }

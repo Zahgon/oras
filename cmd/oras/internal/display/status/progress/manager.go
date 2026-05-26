@@ -47,113 +47,39 @@ type manager struct {
 
 // NewManager initialized a new progress manager.
 func NewManager(tty *os.File, prompts map[progress.State]string) (progress.Manager, error) {
-	c, err := console.NewConsole(tty)
-	if err != nil {
-		return nil, err
-	}
-	return newManager(c, prompts), nil
+	_ = "STUB: not implemented"
+	return *new(progress.Manager), nil
 }
 
 func newManager(c console.Console, prompts map[progress.State]string) progress.Manager {
-	m := &manager{
-		console:      c,
-		renderDone:   make(chan struct{}),
-		renderClosed: make(chan struct{}),
-		prompts:      prompts,
-	}
-	m.start()
-	return m
+	_ = "STUB: not implemented"
+	return *new(progress.Manager)
 }
 
-func (m *manager) start() {
-	m.console.Save()
-	renderTicker := time.NewTicker(bufFlushDuration)
-	go func() {
-		defer m.console.Restore()
-		defer renderTicker.Stop()
-		for {
-			select {
-			case <-m.renderDone:
-				m.render()
-				close(m.renderClosed)
-				return
-			case <-renderTicker.C:
-				m.render()
-			}
-		}
-	}()
-}
+func (m *manager) start() { _ = "STUB: not implemented"; return }
 
-func (m *manager) render() {
-	m.lock.RLock()
-	defer m.lock.RUnlock()
+func (m *manager) render() { _ = "STUB: not implemented"; return }
 
-	// render with culling: only the latter statuses are rendered.
-	models := m.status
-	height, width := m.console.GetHeightWidth()
-	if n := len(m.status) - height/2; n > 0 {
-		models = models[n:]
-		if height%2 == 1 {
-			view := m.status[n-1].Render(width)
-			m.console.OutputTo(uint(len(models)*2+1), view[1])
-		}
-	}
-	viewHeight := len(models) * 2
-	for i, model := range models {
-		view := model.Render(width)
-		m.console.OutputTo(uint(viewHeight-i*2), view[0])
-		m.console.OutputTo(uint(viewHeight-i*2-1), view[1])
-	}
-}
+// render with culling: only the latter statuses are rendered.
 
 // Track appends a new status with 2-line space for rendering.
 func (m *manager) Track(desc ocispec.Descriptor) (progress.Tracker, error) {
-	if m.closed() {
-		return nil, errManagerStopped
-	}
-
-	m.render()
-	s := newStatus(desc)
-	m.lock.Lock()
-	m.status = append(m.status, s)
-	m.console.NewRow()
-	m.console.NewRow()
-	m.lock.Unlock()
-	return m.newTracker(s), nil
+	_ = "STUB: not implemented"
+	return *new(progress.Tracker), nil
 }
 
 func (m *manager) newTracker(s *status) progress.Tracker {
-	ch := make(chan statusUpdate, bufferSize)
-	m.updating.Go(func() {
-		for update := range ch {
-			update(s)
-		}
-	})
-	return &messenger{
-		update:  ch,
-		prompts: m.prompts,
-	}
+	_ = "STUB: not implemented"
+	return *new(progress.Tracker)
 }
 
 // Close stops all status and waits for updating and rendering.
-func (m *manager) Close() error {
-	if m.closed() {
-		return errManagerStopped
-	}
-	// 1. wait for update to stop
-	m.updating.Wait()
-	// 2. stop periodic rendering
-	close(m.renderDone)
-	// 3. wait for the render stop
-	<-m.renderClosed
-	return nil
-}
+func (m *manager) Close() error { _ = "STUB: not implemented"; return nil }
 
-func (m *manager) closed() bool {
-	select {
-	case <-m.renderClosed:
-		return true
-	default:
-		return false
-	}
-}
+// 1. wait for update to stop
+
+// 2. stop periodic rendering
+
+// 3. wait for the render stop
+
+func (m *manager) closed() bool { _ = "STUB: not implemented"; return false }

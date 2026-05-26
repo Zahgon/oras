@@ -16,13 +16,10 @@ limitations under the License.
 package descriptor
 
 import (
-	"encoding/json"
-	"fmt"
 	"io"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"oras.land/oras/cmd/oras/internal/display/metadata"
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // manifestFetchHandler handles metadata descriptor output.
@@ -33,17 +30,12 @@ type manifestFetchHandler struct {
 
 // OnFetched implements ManifestFetchHandler.
 func (h *manifestFetchHandler) OnFetched(_ string, desc ocispec.Descriptor, _ []byte) error {
-	descBytes, err := json.Marshal(desc)
-	if err != nil {
-		return fmt.Errorf("invalid descriptor: %w", err)
-	}
-	return output.PrintJSON(h.out, descBytes, h.pretty)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // NewManifestFetchHandler creates a new handler.
 func NewManifestFetchHandler(out io.Writer, pretty bool) metadata.ManifestFetchHandler {
-	return &manifestFetchHandler{
-		pretty: pretty,
-		out:    out,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.ManifestFetchHandler)
 }

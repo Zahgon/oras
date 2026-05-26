@@ -16,8 +16,6 @@ limitations under the License.
 package model
 
 import (
-	"fmt"
-
 	"github.com/opencontainers/go-digest"
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 )
@@ -37,32 +35,15 @@ type Node struct {
 
 // AddReferrer adds a node to the discovered referrers tree.
 func (d *Discover) AddReferrer(referrer, subject ocispec.Descriptor) error {
-	to, ok := d.nodes[subject.Digest]
-	if !ok {
-		return fmt.Errorf("unexpected subject descriptor: %v", subject)
-	}
-	from := NewNode(d.name, referrer)
-	d.nodes[from.Digest] = from
-	to.Referrers = append(to.Referrers, from)
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // NewDiscover creates a new discover model.
 func NewDiscover(path string, root ocispec.Descriptor) Discover {
-	treeRoot := NewNode(path, root)
-	return Discover{
-		name: path,
-		nodes: map[digest.Digest]*Node{
-			root.Digest: treeRoot,
-		},
-		Root: treeRoot,
-	}
+	_ = "STUB: not implemented"
+	return *new(Discover)
 }
 
 // NewNode creates a new node.
-func NewNode(name string, desc ocispec.Descriptor) *Node {
-	return &Node{
-		Descriptor: FromDescriptor(name, desc),
-		Referrers:  []*Node{},
-	}
-}
+func NewNode(name string, desc ocispec.Descriptor) *Node { _ = "STUB: not implemented"; return nil }

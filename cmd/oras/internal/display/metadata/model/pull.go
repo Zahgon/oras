@@ -16,13 +16,9 @@ limitations under the License.
 package model
 
 import (
-	"fmt"
-	"path/filepath"
-	"slices"
 	"sync"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
-	"oras.land/oras-go/v2/content/file"
 )
 
 // File records metadata of a pulled file.
@@ -34,25 +30,11 @@ type File struct {
 
 // newFile creates a new file metadata.
 func newFile(name string, outputDir string, desc ocispec.Descriptor, descPath string) (File, error) {
-	path := name
-	if !filepath.IsAbs(name) {
-		var err error
-		path, err = filepath.Abs(filepath.Join(outputDir, name))
-		// not likely to go wrong since the file has already be written to file store
-		if err != nil {
-			return File{}, fmt.Errorf("failed to get absolute path of pulled file %s: %w", name, err)
-		}
-	} else {
-		path = filepath.Clean(path)
-	}
-	if desc.Annotations[file.AnnotationUnpack] == "true" {
-		path += string(filepath.Separator)
-	}
-	return File{
-		Path:       path,
-		Descriptor: FromDescriptor(descPath, desc),
-	}, nil
+	_ = "STUB: not implemented"
+	return *new(File), nil
 }
+
+// not likely to go wrong since the file has already be written to file store
 
 type pull struct {
 	DigestReference
@@ -60,14 +42,7 @@ type pull struct {
 }
 
 // NewPull creates a new metadata struct for pull command.
-func NewPull(digestReference string, files []File) any {
-	return pull{
-		DigestReference: DigestReference{
-			Reference: digestReference,
-		},
-		Files: files,
-	}
-}
+func NewPull(digestReference string, files []File) any { _ = "STUB: not implemented"; return *new(any) }
 
 // Pulled records all pulled files.
 type Pulled struct {
@@ -76,20 +51,10 @@ type Pulled struct {
 }
 
 // Files returns all pulled files.
-func (p *Pulled) Files() []File {
-	p.lock.Lock()
-	defer p.lock.Unlock()
-	return slices.Clone(p.files)
-}
+func (p *Pulled) Files() []File { _ = "STUB: not implemented"; return nil }
 
 // Add adds a pulled file.
 func (p *Pulled) Add(name string, outputDir string, desc ocispec.Descriptor, descPath string) error {
-	p.lock.Lock()
-	defer p.lock.Unlock()
-	file, err := newFile(name, outputDir, desc, descPath)
-	if err != nil {
-		return err
-	}
-	p.files = append(p.files, file)
+	_ = "STUB: not implemented"
 	return nil
 }

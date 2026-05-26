@@ -30,18 +30,15 @@ type BlobPushHandler struct {
 
 // NewBlobPushHandler returns a new handler for Blob push events.
 func NewBlobPushHandler(printer *output.Printer, desc ocispec.Descriptor) metadata.BlobPushHandler {
-	return &BlobPushHandler{
-		printer: printer,
-		desc:    desc,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.BlobPushHandler)
 }
 
 // OnBlobPushed implements metadata.BlobPushHandler.
 func (h *BlobPushHandler) OnBlobPushed(target *option.Target) error {
-	return h.printer.Println("Pushed:", target.GetDisplayReference())
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Render implements metadata.BlobPushHandler.
-func (h *BlobPushHandler) Render() error {
-	return h.printer.Println("Digest:", h.desc.Digest)
-}
+func (h *BlobPushHandler) Render() error { _ = "STUB: not implemented"; return nil }

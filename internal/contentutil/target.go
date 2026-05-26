@@ -17,12 +17,10 @@ package contentutil
 
 import (
 	"context"
-	"errors"
 	"io"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"oras.land/oras-go/v2"
-	"oras.land/oras-go/v2/errdef"
 )
 
 type multiReadOnlyTarget struct {
@@ -31,48 +29,28 @@ type multiReadOnlyTarget struct {
 
 // MultiReadOnlyTarget returns a ReadOnlyTarget that combines multiple targets.
 func MultiReadOnlyTarget(targets ...oras.ReadOnlyTarget) oras.ReadOnlyTarget {
-	return &multiReadOnlyTarget{
-		targets: targets,
-	}
+	_ = "STUB: not implemented"
+	return *new(oras.ReadOnlyTarget)
 }
 
 // Fetch fetches the content from the targets in order and return first found
 // content. If no content is found, it returns ErrNotFound.
 func (m *multiReadOnlyTarget) Fetch(ctx context.Context, target ocispec.Descriptor) (io.ReadCloser, error) {
-	lastErr := errdef.ErrNotFound
-	for _, c := range m.targets {
-		rc, err := c.Fetch(ctx, target)
-		if err == nil {
-			return rc, nil
-		}
-		if !errors.Is(err, errdef.ErrNotFound) {
-			return nil, err
-		}
-		lastErr = err
-	}
-	return nil, lastErr
+	_ = "STUB: not implemented"
+	return *new(io.ReadCloser), nil
 }
 
 // Exists returns true if the content exists in any of the targets.
 // multiReadOnlyTarget does not implement Exists() because it's read-only.
 func (m *multiReadOnlyTarget) Exists(_ context.Context, _ ocispec.Descriptor) (bool, error) {
-	return false, errors.New("MultiReadOnlyTarget.Exists() is not implemented")
+	_ = "STUB: not implemented"
+	return false, nil
 }
 
 // Resolve resolves the reference to a descriptor from the targets in order and
 // return first found descriptor. If no descriptor is found, it returns
 // ErrNotFound.
 func (m *multiReadOnlyTarget) Resolve(ctx context.Context, ref string) (ocispec.Descriptor, error) {
-	lastErr := errdef.ErrNotFound
-	for _, c := range m.targets {
-		desc, err := c.Resolve(ctx, ref)
-		if err == nil {
-			return desc, nil
-		}
-		if !errors.Is(err, errdef.ErrNotFound) {
-			return ocispec.Descriptor{}, err
-		}
-		lastErr = err
-	}
-	return ocispec.Descriptor{}, lastErr
+	_ = "STUB: not implemented"
+	return *new(ocispec.Descriptor), nil
 }

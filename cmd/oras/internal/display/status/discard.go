@@ -24,143 +24,195 @@ import (
 )
 
 func discardStopTrack() error {
+	_ = "STUB: not implemented"
+
+	// DiscardHandler is a no-op handler that discards all status updates.
 	return nil
 }
 
-// DiscardHandler is a no-op handler that discards all status updates.
 type DiscardHandler struct{}
 
 // NewDiscardHandler returns a new no-op handler.
 func NewDiscardHandler() DiscardHandler {
-	return DiscardHandler{}
+	_ = "STUB: not implemented"
+	return *
+
+	// OnFileLoading is called before a file is being loaded.
+	new(DiscardHandler)
 }
 
-// OnFileLoading is called before a file is being loaded.
 func (DiscardHandler) OnFileLoading(string) error {
+	_ = "STUB: not implemented"
+
+	// OnEmptyArtifact is called when no file is loaded for an artifact push.
 	return nil
 }
 
-// OnEmptyArtifact is called when no file is loaded for an artifact push.
 func (DiscardHandler) OnEmptyArtifact() error {
+	_ = "STUB: not implemented"
+
+	// TrackTarget returns a target with status tracking.
 	return nil
 }
 
-// TrackTarget returns a target with status tracking.
 func (DiscardHandler) TrackTarget(gt oras.GraphTarget) (oras.GraphTarget, StopTrackTargetFunc, error) {
-	return gt, discardStopTrack, nil
+	_ = "STUB: not implemented"
+	return *new(oras.GraphTarget), *new(StopTrackTargetFunc), nil
 }
 
 // OnCopySkipped is called when an object already exists.
 func (DiscardHandler) OnCopySkipped(_ context.Context, _ ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// PreCopy implements PreCopy of CopyHandler.
 	return nil
 }
 
-// PreCopy implements PreCopy of CopyHandler.
 func (DiscardHandler) PreCopy(_ context.Context, _ ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// PostCopy implements PostCopy of CopyHandler.
 	return nil
 }
 
-// PostCopy implements PostCopy of CopyHandler.
 func (DiscardHandler) PostCopy(_ context.Context, _ ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// OnNodeDownloading implements PullHandler.
 	return nil
 }
 
-// OnNodeDownloading implements PullHandler.
 func (DiscardHandler) OnNodeDownloading(_ ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// OnNodeDownloaded implements PullHandler.
 	return nil
 }
 
-// OnNodeDownloaded implements PullHandler.
 func (DiscardHandler) OnNodeDownloaded(_ ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// OnNodeRestored implements PullHandler.
 	return nil
 }
 
-// OnNodeRestored implements PullHandler.
 func (DiscardHandler) OnNodeRestored(_ ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// OnNodeProcessing implements PullHandler.
 	return nil
 }
 
-// OnNodeProcessing implements PullHandler.
 func (DiscardHandler) OnNodeProcessing(_ ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// OnNodeProcessing implements PullHandler.
 	return nil
 }
 
-// OnNodeProcessing implements PullHandler.
 func (DiscardHandler) OnNodeSkipped(_ ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// OnFetching implements referenceFetchHandler.
 	return nil
 }
 
-// OnFetching implements referenceFetchHandler.
 func (DiscardHandler) OnFetching(string) error {
+	_ = "STUB: not implemented"
+
+	// OnFetched implements referenceFetchHandler.
 	return nil
 }
 
-// OnFetched implements referenceFetchHandler.
 func (DiscardHandler) OnFetched(string, ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// OnManifestPushSkipped implements ManifestPushHandler.
 	return nil
 }
 
-// OnManifestPushSkipped implements ManifestPushHandler.
 func (DiscardHandler) OnManifestPushSkipped() error {
+	_ = "STUB: not implemented"
+
+	// OnManifestPushing implements ManifestPushHandler.
 	return nil
 }
 
-// OnManifestPushing implements ManifestPushHandler.
 func (DiscardHandler) OnManifestPushing() error {
+	_ = "STUB: not implemented"
+
+	// OnManifestPushed implements ManifestPushHandler.
 	return nil
 }
 
-// OnManifestPushed implements ManifestPushHandler.
 func (DiscardHandler) OnManifestPushed() error {
+	_ = "STUB: not implemented"
+
+	// OnManifestRemoved implements ManifestIndexUpdateHandler.
 	return nil
 }
 
-// OnManifestRemoved implements ManifestIndexUpdateHandler.
 func (DiscardHandler) OnManifestRemoved(digest.Digest) error {
+	_ = "STUB: not implemented"
+
+	// OnManifestAdded implements ManifestIndexUpdateHandler.
 	return nil
 }
 
-// OnManifestAdded implements ManifestIndexUpdateHandler.
 func (DiscardHandler) OnManifestAdded(string, ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// OnIndexMerged implements ManifestIndexUpdateHandler.
 	return nil
 }
 
-// OnIndexMerged implements ManifestIndexUpdateHandler.
 func (DiscardHandler) OnIndexMerged(string, ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// OnIndexPacked implements ManifestIndexCreateHandler.
 	return nil
 }
 
-// OnIndexPacked implements ManifestIndexCreateHandler.
 func (DiscardHandler) OnIndexPacked(ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// OnIndexPushed implements ManifestIndexCreateHandler.
 	return nil
 }
 
-// OnIndexPushed implements ManifestIndexCreateHandler.
 func (DiscardHandler) OnIndexPushed(string) error {
+	_ = "STUB: not implemented"
+
+	// OnBlobExists implements BlobPushHandler.
 	return nil
 }
 
-// OnBlobExists implements BlobPushHandler.
 func (DiscardHandler) OnBlobExists() error {
+	_ = "STUB: not implemented"
+
+	// OnBlobUploading implements BlobPushHandler.
 	return nil
 }
 
-// OnBlobUploading implements BlobPushHandler.
 func (DiscardHandler) OnBlobUploading() error {
+	_ = "STUB: not implemented"
+
+	// OnBlobUploaded implements BlobPushHandler.
 	return nil
 }
 
-// OnBlobUploaded implements BlobPushHandler.
 func (DiscardHandler) OnBlobUploaded() error {
+	_ = "STUB: not implemented"
+
+	// StartTracking implements BlobPushHandler.
 	return nil
 }
 
-// StartTracking implements BlobPushHandler.
 func (DiscardHandler) StartTracking(gt oras.GraphTarget) (oras.GraphTarget, error) {
-	return gt, nil
+	_ = "STUB: not implemented"
+
+	// StopTracking implements BlobPushHandler.
+	return *new(oras.GraphTarget), nil
 }
 
-// StopTracking implements BlobPushHandler.
-func (DiscardHandler) StopTracking() error {
-	return nil
-}
+func (DiscardHandler) StopTracking() error { _ = "STUB: not implemented"; return nil }

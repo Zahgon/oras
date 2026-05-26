@@ -16,14 +16,8 @@ limitations under the License.
 package option
 
 import (
-	"bytes"
-	"fmt"
-	"strings"
-	"text/tabwriter"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	oerrors "oras.land/oras/cmd/oras/internal/errors"
 )
 
 // FormatType represents a format type.
@@ -37,13 +31,7 @@ type FormatType struct {
 }
 
 // WithUsage returns a new format type with provided usage string.
-func (ft *FormatType) WithUsage(usage string) *FormatType {
-	return &FormatType{
-		Name:      ft.Name,
-		HasParams: ft.HasParams,
-		Usage:     usage,
-	}
-}
+func (ft *FormatType) WithUsage(usage string) *FormatType { _ = "STUB: not implemented"; return nil }
 
 // format types
 var (
@@ -81,79 +69,28 @@ type Format struct {
 
 // SetTypes sets the default format type and allowed format types.
 func (f *Format) SetTypes(defaultType *FormatType, otherTypes ...*FormatType) {
-	f.FormatFlag = defaultType.Name
-	f.allowedTypes = append(otherTypes, defaultType)
+	_ = "STUB: not implemented"
+	return
 }
 
 // ApplyFlags implements FlagProvider.ApplyFlag.
-func (f *Format) ApplyFlags(fs *pflag.FlagSet) {
-	buf := bytes.NewBufferString("[Experimental] format output using a custom template:")
-	w := tabwriter.NewWriter(buf, 0, 0, 2, ' ', 0)
-	for _, t := range f.allowedTypes {
-		_, _ = fmt.Fprintf(w, "\n'%s':\t%s", t.Name, t.Usage)
-	}
-	_ = w.Flush()
-	// apply flags
-	fs.StringVar(&f.FormatFlag, "format", f.FormatFlag, buf.String())
-	fs.StringVar(&f.Template, "template", "", "[Experimental] template string used to format output")
-}
+func (f *Format) ApplyFlags(fs *pflag.FlagSet) { _ = "STUB: not implemented"; return }
+
+// apply flags
 
 // Parse parses the input format flag.
 func (f *Format) Parse(cmd *cobra.Command) error {
+	_ = "STUB: not implemented"
 	// print deprecation message for table format
-	if f.FormatFlag == FormatTypeTable.Name {
-		_, _ = fmt.Fprint(cmd.ErrOrStderr(), "Format \"table\" is deprecated and will be removed in a future release.\n")
-	}
-	if err := f.parseFlag(); err != nil {
-		return err
-	}
-
-	if f.Type == FormatTypeText.Name {
-		// flag not specified
-		return nil
-	}
-
-	if f.Type == FormatTypeGoTemplate.Name && f.Template == "" {
-		return &oerrors.Error{
-			Err:            fmt.Errorf("%q format specified but no template given", f.Type),
-			Recommendation: fmt.Sprintf("use `--format %s=TEMPLATE` to specify the template", f.Type),
-		}
-	}
-
-	var optionalTypes []string
-	for _, t := range f.allowedTypes {
-		if f.Type == t.Name {
-			// type validation passed
-			return nil
-		}
-		optionalTypes = append(optionalTypes, t.Name)
-	}
-	return &oerrors.Error{
-		Err:            fmt.Errorf("invalid format type: %q", f.Type),
-		Recommendation: fmt.Sprintf("supported types: %s", strings.Join(optionalTypes, ", ")),
-	}
-}
-
-func (f *Format) parseFlag() error {
-	f.Type = f.FormatFlag
-	if f.Template != "" {
-		// template explicitly set
-		if f.Type != FormatTypeGoTemplate.Name {
-			return fmt.Errorf("--template must be used with --format %s", FormatTypeGoTemplate.Name)
-		}
-		return nil
-	}
-
-	for _, t := range f.allowedTypes {
-		if !t.HasParams {
-			continue
-		}
-		prefix := t.Name + "="
-		if strings.HasPrefix(f.FormatFlag, prefix) {
-			// parse type and add parameter to template
-			f.Type = t.Name
-			f.Template = f.FormatFlag[len(prefix):]
-		}
-	}
 	return nil
 }
+
+// flag not specified
+
+// type validation passed
+
+func (f *Format) parseFlag() error { _ = "STUB: not implemented"; return nil }
+
+// template explicitly set
+
+// parse type and add parameter to template

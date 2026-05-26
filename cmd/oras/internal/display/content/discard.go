@@ -21,15 +21,17 @@ type DiscardHandler struct{}
 
 // OnContentFetched implements ManifestFetchHandler.
 func (DiscardHandler) OnContentFetched(ocispec.Descriptor, []byte) error {
+	_ = "STUB: not implemented"
+
+	// OnContentCreated implements ManifestIndexCreateHandler.
 	return nil
 }
 
-// OnContentCreated implements ManifestIndexCreateHandler.
 func (DiscardHandler) OnContentCreated([]byte) error {
+	_ = "STUB: not implemented"
+
+	// NewDiscardHandler returns a new discard handler.
 	return nil
 }
 
-// NewDiscardHandler returns a new discard handler.
-func NewDiscardHandler() DiscardHandler {
-	return DiscardHandler{}
-}
+func NewDiscardHandler() DiscardHandler { _ = "STUB: not implemented"; return *new(DiscardHandler) }

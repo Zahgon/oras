@@ -21,12 +21,10 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"oras.land/oras/cmd/oras/internal/option"
-	"oras.land/oras/internal/trace"
 )
 
 // GetLogger returns a new FieldLogger and an associated Context derived from command context.
 func GetLogger(cmd *cobra.Command, opts *option.Common) (context.Context, logrus.FieldLogger) {
-	ctx, logger := trace.NewLogger(cmd.Context(), opts.Debug)
-	cmd.SetContext(ctx)
-	return ctx, logger
+	_ = "STUB: not implemented"
+	return *new(context.Context), *new(logrus.FieldLogger)
 }

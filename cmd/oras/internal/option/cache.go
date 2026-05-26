@@ -16,11 +16,7 @@ limitations under the License.
 package option
 
 import (
-	"os"
-
 	"oras.land/oras-go/v2"
-	"oras.land/oras-go/v2/content/oci"
-	"oras.land/oras/internal/cache"
 )
 
 type Cache struct {
@@ -29,13 +25,6 @@ type Cache struct {
 
 // CachedTarget gets the target storage with caching if cache root is specified.
 func (opts *Cache) CachedTarget(src oras.ReadOnlyTarget) (oras.ReadOnlyTarget, error) {
-	opts.Root = os.Getenv("ORAS_CACHE")
-	if opts.Root != "" {
-		ociStore, err := oci.New(opts.Root)
-		if err != nil {
-			return nil, err
-		}
-		return cache.New(src, ociStore), nil
-	}
-	return src, nil
+	_ = "STUB: not implemented"
+	return *new(oras.ReadOnlyTarget), nil
 }

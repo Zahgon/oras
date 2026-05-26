@@ -15,10 +15,5 @@ limitations under the License.
 
 package contentutil
 
-import "github.com/opencontainers/go-digest"
-
 // IsDigest checks if the given string is a valid digest.
-func IsDigest(tagOrDigest string) bool {
-	_, err := digest.Parse(tagOrDigest)
-	return err == nil
-}
+func IsDigest(tagOrDigest string) bool { _ = "STUB: not implemented"; return false }

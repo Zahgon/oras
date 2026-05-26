@@ -43,28 +43,8 @@ const (
 
 // ResolveFlags generates resolve flags for localhost mapping.
 func ResolveFlags(reg string, host string, flagType resolveType) []string {
-	Expect(reg).To(HavePrefix("localhost:"), fmt.Sprintf("%q is not in format of localhost:<port>", reg))
-	_, port, _ := strings.Cut(reg, ":")
-	resolveFlag := "resolve"
-	usernameFlag := "username"
-	passwordFlag := "password"
-	plainHttpFlag := "plain-http"
-	fp := "--"
-
-	switch flagType {
-	case resolveFrom:
-		resolveFlag = "from-" + resolveFlag
-		usernameFlag = "from-" + usernameFlag
-		passwordFlag = "from-" + passwordFlag
-		plainHttpFlag = "from-" + plainHttpFlag
-	case resolveTo:
-		resolveFlag = "to-" + resolveFlag
-		usernameFlag = "to-" + usernameFlag
-		passwordFlag = "to-" + passwordFlag
-		plainHttpFlag = "to-" + plainHttpFlag
-	}
-
-	return []string{fp + resolveFlag, fmt.Sprintf("%s:80:127.0.0.1:%s", host, port), fp + usernameFlag, Username, fp + passwordFlag, Password, fp + plainHttpFlag}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 var _ = Describe("1.1 registry users:", func() {

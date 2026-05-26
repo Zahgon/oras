@@ -16,11 +16,7 @@ limitations under the License.
 package content
 
 import (
-	"fmt"
 	"io"
-	"os"
-
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // manifestIndexCreate handles raw content output.
@@ -32,31 +28,13 @@ type manifestIndexCreate struct {
 
 // NewManifestIndexCreateHandler creates a new handler.
 func NewManifestIndexCreateHandler(out io.Writer, pretty bool, outputPath string) ManifestIndexCreateHandler {
+	_ = "STUB: not implemented"
 	// ignore --pretty when output to a file
-	if outputPath != "" && outputPath != "-" {
-		pretty = false
-	}
-	return &manifestIndexCreate{
-		pretty:     pretty,
-		stdout:     out,
-		outputPath: outputPath,
-	}
+	return *new(ManifestIndexCreateHandler)
 }
 
 // OnContentCreated is called after index content is created.
 func (h *manifestIndexCreate) OnContentCreated(manifest []byte) (eventErr error) {
-	out := h.stdout
-	if h.outputPath != "" && h.outputPath != "-" {
-		f, err := os.Create(h.outputPath)
-		if err != nil {
-			return fmt.Errorf("failed to open %q: %w", h.outputPath, err)
-		}
-		defer func() {
-			if err := f.Close(); eventErr == nil {
-				eventErr = err
-			}
-		}()
-		out = f
-	}
-	return output.PrintJSON(out, manifest, h.pretty)
+	_ = "STUB: not implemented"
+	return nil
 }

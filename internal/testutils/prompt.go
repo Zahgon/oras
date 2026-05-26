@@ -31,10 +31,12 @@ type PromptDiscarder struct {
 
 // Report discards the prompt.
 func (p *PromptDiscarder) Report(ocispec.Descriptor, progress.State) error {
+	_ = "STUB: not implemented"
+
+	// ErrorPrompt mocks an errored prompt.
 	return nil
 }
 
-// ErrorPrompt mocks an errored prompt.
 type ErrorPrompt struct {
 	oras.GraphTarget
 	io.Closer
@@ -42,13 +44,10 @@ type ErrorPrompt struct {
 }
 
 // NewErrorPrompt creates an error prompt.
-func NewErrorPrompt(err error) *ErrorPrompt {
-	return &ErrorPrompt{
-		wanted: err,
-	}
-}
+func NewErrorPrompt(err error) *ErrorPrompt { _ = "STUB: not implemented"; return nil }
 
 // Report reports wanted prompt.
 func (e *ErrorPrompt) Report(ocispec.Descriptor, progress.State) error {
-	return e.wanted
+	_ = "STUB: not implemented"
+	return nil
 }

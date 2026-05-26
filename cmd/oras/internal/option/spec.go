@@ -16,12 +16,8 @@ limitations under the License.
 package option
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/spf13/pflag"
 	"oras.land/oras-go/v2"
-	oerrors "oras.land/oras/cmd/oras/internal/errors"
 )
 
 const (
@@ -42,47 +38,30 @@ type ImageSpec struct {
 }
 
 // Set validates and sets the flag value from a string argument.
-func (is *ImageSpec) Set(value string) error {
-	is.Flag = value
-	switch value {
-	case ImageSpecV1_1:
-		is.PackVersion = oras.PackManifestVersion1_1
-	case ImageSpecV1_0:
-		is.PackVersion = oras.PackManifestVersion1_0
-	default:
-		return &oerrors.Error{
-			Err:            fmt.Errorf("unknown image specification flag: %s", value),
-			Recommendation: fmt.Sprintf("Available options: %s", is.Options()),
-		}
-	}
-	return nil
-}
+func (is *ImageSpec) Set(value string) error { _ = "STUB: not implemented"; return nil }
 
 // Type returns the string value of the inner flag.
 func (is *ImageSpec) Type() string {
-	return "string"
+	_ = "STUB: not implemented"
+
+	// Options returns the string of usable options for the flag.
+	return ""
 }
 
-// Options returns the string of usable options for the flag.
-func (is *ImageSpec) Options() string {
-	return strings.Join([]string{
-		ImageSpecV1_1,
-		ImageSpecV1_0,
-	}, ", ")
-}
+func (is *ImageSpec) Options() string { _ = "STUB: not implemented"; return "" }
 
 // String returns the string representation of the flag.
 func (is *ImageSpec) String() string {
+	_ = "STUB: not implemented"
 	// to avoid printing default value in usage doc
 	return ""
 }
 
 // ApplyFlags applies flags to a command flag set.
 func (is *ImageSpec) ApplyFlags(fs *pflag.FlagSet) {
+	_ = "STUB: not implemented"
 	// default to v1.1, unless --config is used and --artifact-type is not used
-	is.PackVersion = oras.PackManifestVersion1_1
-	is.Flag = ImageSpecV1_1
-	fs.Var(is, "image-spec", `[Preview] specify manifest type for building artifact. Options: v1.1, v1.0 (default v1.1, overridden to v1.0 if --config is used without --artifact-type)`)
+	return
 }
 
 // referrersState represents the state of Referrers API.
@@ -110,43 +89,27 @@ type DistributionSpec struct {
 }
 
 // Set validates and sets the flag value from a string argument.
-func (ds *DistributionSpec) Set(value string) error {
-	ds.flag = value
-	ds.ReferrersAPI = ReferrersStateUnknown
-	switch ds.flag {
-	case DistributionSpecReferrersTagV1_1:
-		ds.ReferrersAPI = ReferrersStateUnsupported
-	case DistributionSpecReferrersAPIV1_1:
-		ds.ReferrersAPI = ReferrersStateSupported
-	default:
-		return &oerrors.Error{
-			Err:            fmt.Errorf("unknown distribution specification flag: %s", value),
-			Recommendation: fmt.Sprintf("Available options: %s", ds.Options()),
-		}
-	}
-	return nil
-}
+func (ds *DistributionSpec) Set(value string) error { _ = "STUB: not implemented"; return nil }
 
 // Type returns the string value of the inner flag.
 func (ds *DistributionSpec) Type() string {
-	return "string"
+	_ = "STUB: not implemented"
+
+	// Options returns the string of usable options for the flag.
+	return ""
 }
 
-// Options returns the string of usable options for the flag.
-func (ds *DistributionSpec) Options() string {
-	return strings.Join([]string{
-		DistributionSpecReferrersTagV1_1,
-		DistributionSpecReferrersAPIV1_1,
-	}, ", ")
-}
+func (ds *DistributionSpec) Options() string { _ = "STUB: not implemented"; return "" }
 
 // String returns the string representation of the flag.
 func (ds *DistributionSpec) String() string {
-	return ds.flag
+	_ = "STUB: not implemented"
+
+	// ApplyFlagsWithPrefix applies flags to a command flag set with a prefix string.
+	return ""
 }
 
-// ApplyFlagsWithPrefix applies flags to a command flag set with a prefix string.
 func (ds *DistributionSpec) ApplyFlagsWithPrefix(fs *pflag.FlagSet, prefix, description string) {
-	ds.flag = DistributionSpecReferrersUnknown
-	fs.Var(ds, prefix+"distribution-spec", fmt.Sprintf("[Preview] set OCI distribution spec version and API option for %starget. Options: %s", description, ds.Options()))
+	_ = "STUB: not implemented"
+	return
 }

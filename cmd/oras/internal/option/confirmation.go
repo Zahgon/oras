@@ -16,10 +16,7 @@ limitations under the License.
 package option
 
 import (
-	"bufio"
-	"fmt"
 	"io"
-	"strings"
 
 	"github.com/spf13/pflag"
 )
@@ -30,33 +27,11 @@ type Confirmation struct {
 }
 
 // ApplyFlags applies flags to a command flag set.
-func (opts *Confirmation) ApplyFlags(fs *pflag.FlagSet) {
-	fs.BoolVarP(&opts.Force, "force", "f", false, "ignore nonexistent references, never prompt")
-}
+func (opts *Confirmation) ApplyFlags(fs *pflag.FlagSet) { _ = "STUB: not implemented"; return }
 
 // AskForConfirmation prints a propmt to ask for confirmation before doing an
 // action and takes user input as response.
 func (opts *Confirmation) AskForConfirmation(r io.Reader, prompt string) (bool, error) {
-	if opts.Force {
-		return true, nil
-	}
-
-	fmt.Print(prompt, " [y/N] ")
-
-	var response string
-	scanner := bufio.NewScanner(r)
-	if ok := scanner.Scan(); ok {
-		response = scanner.Text()
-	}
-	if err := scanner.Err(); err != nil {
-		return false, err
-	}
-
-	switch strings.ToLower(response) {
-	case "y", "yes":
-		return true, nil
-	default:
-		fmt.Println("Operation cancelled.")
-		return false, nil
-	}
+	_ = "STUB: not implemented"
+	return false, nil
 }

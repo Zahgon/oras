@@ -28,12 +28,7 @@ type Common struct {
 }
 
 // ApplyFlags applies flags to a command flag set.
-func (opts *Common) ApplyFlags(fs *pflag.FlagSet) {
-	fs.BoolVarP(&opts.Debug, "debug", "d", false, "output debug logs (implies --no-tty)")
-}
+func (opts *Common) ApplyFlags(fs *pflag.FlagSet) { _ = "STUB: not implemented"; return }
 
 // Parse gets target options from user input.
-func (opts *Common) Parse(cmd *cobra.Command) error {
-	opts.Printer = output.NewPrinter(cmd.OutOrStdout(), cmd.OutOrStderr())
-	return nil
-}
+func (opts *Common) Parse(cmd *cobra.Command) error { _ = "STUB: not implemented"; return nil }

@@ -22,14 +22,7 @@ type Repositories struct {
 }
 
 // NewRepositories creates a new Repositories model.
-func NewRepositories(registry string) *Repositories {
-	return &Repositories{
-		Registry:     registry,
-		Repositories: []string{},
-	}
-}
+func NewRepositories(registry string) *Repositories { _ = "STUB: not implemented"; return nil }
 
 // AddRepository adds a repository to the metadata.
-func (r *Repositories) AddRepository(repo string) {
-	r.Repositories = append(r.Repositories, repo)
-}
+func (r *Repositories) AddRepository(repo string) { _ = "STUB: not implemented"; return }

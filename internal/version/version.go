@@ -27,9 +27,4 @@ var (
 )
 
 // GetVersion returns the semver string of the version
-func GetVersion() string {
-	if BuildMetadata == "" {
-		return Version
-	}
-	return Version + "+" + BuildMetadata
-}
+func GetVersion() string { _ = "STUB: not implemented"; return "" }

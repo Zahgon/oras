@@ -24,5 +24,6 @@ type attach struct {
 
 // NewAttach returns a metadata getter for attach command.
 func NewAttach(desc ocispec.Descriptor, path string) any {
-	return attach{FromDescriptor(path, desc)}
+	_ = "STUB: not implemented"
+	return *new(any)
 }

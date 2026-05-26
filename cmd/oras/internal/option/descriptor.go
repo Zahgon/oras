@@ -16,9 +16,6 @@ limitations under the License.
 package option
 
 import (
-	"encoding/json"
-	"fmt"
-
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"github.com/spf13/pflag"
 )
@@ -29,15 +26,10 @@ type Descriptor struct {
 }
 
 // ApplyFlags applies flags to a command flag set.
-func (opts *Descriptor) ApplyFlags(fs *pflag.FlagSet) {
-	fs.BoolVarP(&opts.OutputDescriptor, "descriptor", "", false, "output the descriptor")
-}
+func (opts *Descriptor) ApplyFlags(fs *pflag.FlagSet) { _ = "STUB: not implemented"; return }
 
 // Marshal returns the JSON encoding of descriptor.
 func (opts *Descriptor) Marshal(desc ocispec.Descriptor) ([]byte, error) {
-	b, err := json.Marshal(desc)
-	if err != nil {
-		return nil, fmt.Errorf("failed to marshal descriptor: %w", err)
-	}
-	return b, nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }

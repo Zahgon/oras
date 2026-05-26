@@ -17,30 +17,17 @@ limitations under the License.
 
 package fileref
 
-import (
-	"fmt"
-	"strings"
-	"unicode"
-)
-
 // Parse parses file reference into filePath and metadata.
 func Parse(reference string, defaultMetadata string) (filePath, metadata string, err error) {
-	filePath, metadata = doParse(reference, defaultMetadata)
-	if filePath == "" {
-		return "", "", fmt.Errorf("found empty file path in %q", reference)
-	}
-	if strings.ContainsAny(filePath, `<>"|?*`) {
-		// Reference: https://learn.microsoft.com/windows/win32/fileio/naming-a-file#naming-conventions
-		return "", "", fmt.Errorf("reserved characters found in the file path: %s", filePath)
-	}
-	return filePath, metadata, nil
+	_ = "STUB: not implemented"
+	return "", "", nil
 }
 
+// Reference: https://learn.microsoft.com/windows/win32/fileio/naming-a-file#naming-conventions
+
 func doParse(reference string, defaultMetadata string) (filePath, metadata string) {
-	i := strings.LastIndex(reference, ":")
-	if i < 0 || (i == 1 && len(reference) > 2 && unicode.IsLetter(rune(reference[0])) && reference[2] == '\\') {
-		// Relative file path with disk prefix is NOT supported, e.g. `c:file1`
-		return reference, defaultMetadata
-	}
-	return reference[:i], reference[i+1:]
+	_ = "STUB: not implemented"
+	return "", ""
 }
+
+// Relative file path with disk prefix is NOT supported, e.g. `c:file1`

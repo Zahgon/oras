@@ -28,25 +28,12 @@ const loggerKey contextKey = iota
 
 // NewLogger returns a logger.
 func NewLogger(ctx context.Context, debug bool) (context.Context, logrus.FieldLogger) {
-	var logLevel logrus.Level
-	if debug {
-		logLevel = logrus.DebugLevel
-	} else {
-		logLevel = logrus.WarnLevel
-	}
-
-	logger := logrus.New()
-	logger.SetFormatter(&TextFormatter{})
-	logger.SetLevel(logLevel)
-	entry := logger.WithContext(ctx)
-	return context.WithValue(ctx, loggerKey, entry), entry
+	_ = "STUB: not implemented"
+	return *new(context.Context), *new(logrus.FieldLogger)
 }
 
 // Logger return the logger attached to context or the standard one.
 func Logger(ctx context.Context) logrus.FieldLogger {
-	logger, ok := ctx.Value(loggerKey).(logrus.FieldLogger)
-	if !ok {
-		return logrus.StandardLogger()
-	}
-	return logger
+	_ = "STUB: not implemented"
+	return *new(logrus.FieldLogger)
 }

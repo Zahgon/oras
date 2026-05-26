@@ -18,7 +18,6 @@ package cache
 import (
 	"context"
 	"io"
-	"sync"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"oras.land/oras-go/v2"
@@ -29,10 +28,12 @@ import (
 type closer func() error
 
 func (fn closer) Close() error {
-	return fn()
+	_ = "STUB: not implemented"
+
+	// Cache target struct.
+	return nil
 }
 
-// Cache target struct.
 type target struct {
 	oras.ReadOnlyTarget
 	cache content.Storage
@@ -40,75 +41,29 @@ type target struct {
 
 // New generates a new target storage with caching.
 func New(source oras.ReadOnlyTarget, cache content.Storage) oras.ReadOnlyTarget {
-	t := &target{
-		ReadOnlyTarget: source,
-		cache:          cache,
-	}
-	if refFetcher, ok := source.(registry.ReferenceFetcher); ok {
-		return &referenceTarget{
-			target:           t,
-			ReferenceFetcher: refFetcher,
-		}
-	}
-	return t
+	_ = "STUB: not implemented"
+	return *new(oras.ReadOnlyTarget)
 }
 
 // Fetch fetches the content identified by the descriptor.
 func (t *target) Fetch(ctx context.Context, target ocispec.Descriptor) (io.ReadCloser, error) {
-	rc, err := t.cache.Fetch(ctx, target)
-	if err == nil {
-		// Fetch from cache
-		return rc, nil
-	}
-
-	if rc, err = t.ReadOnlyTarget.Fetch(ctx, target); err != nil {
-		return nil, err
-	}
-
-	// Fetch from origin with caching
-	return t.cacheReadCloser(ctx, rc, target), nil
+	_ = "STUB: not implemented"
+	return *new(io.ReadCloser), nil
 }
 
+// Fetch from cache
+
+// Fetch from origin with caching
+
 func (t *target) cacheReadCloser(ctx context.Context, rc io.ReadCloser, target ocispec.Descriptor) io.ReadCloser {
-	pr, pw := io.Pipe()
-	var wg sync.WaitGroup
-
-	wg.Add(1)
-	var pushErr error
-	go func() {
-		defer wg.Done()
-		pushErr = t.cache.Push(ctx, target, pr)
-		if pushErr != nil {
-			pr.CloseWithError(pushErr)
-		}
-	}()
-
-	return struct {
-		io.Reader
-		io.Closer
-	}{
-		Reader: io.TeeReader(rc, pw),
-		Closer: closer(func() error {
-			rcErr := rc.Close()
-			if err := pw.Close(); err != nil {
-				return err
-			}
-			wg.Wait()
-			if pushErr != nil {
-				return pushErr
-			}
-			return rcErr
-		}),
-	}
+	_ = "STUB: not implemented"
+	return *new(io.ReadCloser)
 }
 
 // Exists returns true if the described content exists.
 func (t *target) Exists(ctx context.Context, desc ocispec.Descriptor) (bool, error) {
-	exists, err := t.cache.Exists(ctx, desc)
-	if err == nil && exists {
-		return true, nil
-	}
-	return t.ReadOnlyTarget.Exists(ctx, desc)
+	_ = "STUB: not implemented"
+	return false, nil
 }
 
 // Cache referenceTarget struct.
@@ -122,32 +77,14 @@ type referenceTarget struct {
 // Cached content will only be read via Fetch, FetchReference will always fetch
 // From origin.
 func (t *referenceTarget) FetchReference(ctx context.Context, reference string) (ocispec.Descriptor, io.ReadCloser, error) {
-	target, rc, err := t.ReferenceFetcher.FetchReference(ctx, reference)
-	if err != nil {
-		return ocispec.Descriptor{}, nil, err
-	}
-
-	// skip caching if the content already exists in cache
-	exists, err := t.cache.Exists(ctx, target)
-	if err != nil {
-		return ocispec.Descriptor{}, nil, err
-	}
-	if exists {
-		err = rc.Close()
-		if err != nil {
-			return ocispec.Descriptor{}, nil, err
-		}
-
-		// get rc from the cache
-		rc, err = t.cache.Fetch(ctx, target)
-		if err != nil {
-			return ocispec.Descriptor{}, nil, err
-		}
-
-		// no need to do tee'd push
-		return target, rc, nil
-	}
-
-	// Fetch from origin with caching
-	return target, t.cacheReadCloser(ctx, rc, target), nil
+	_ = "STUB: not implemented"
+	return *new(ocispec.Descriptor), *new(io.ReadCloser), nil
 }
+
+// skip caching if the content already exists in cache
+
+// get rc from the cache
+
+// no need to do tee'd push
+
+// Fetch from origin with caching

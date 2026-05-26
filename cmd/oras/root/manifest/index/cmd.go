@@ -19,15 +19,4 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func Cmd() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "index [command]",
-		Short: "[Experimental] Index operations",
-	}
-
-	cmd.AddCommand(
-		createCmd(),
-		updateCmd(),
-	)
-	return cmd
-}
+func Cmd() *cobra.Command { _ = "STUB: not implemented"; return nil }

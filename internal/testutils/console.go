@@ -18,12 +18,7 @@ limitations under the License.
 package testutils
 
 import (
-	"bytes"
-	"fmt"
-	"io"
 	"os"
-	"strings"
-	"sync"
 
 	containerd "github.com/containerd/console"
 )
@@ -31,41 +26,16 @@ import (
 // NewPty creates a new pty pair for testing, caller is responsible for closing
 // the returned device file if err is not nil.
 func NewPty() (containerd.Console, *os.File, error) {
-	pty, devicePath, err := containerd.NewPty()
-	if err != nil {
-		return nil, nil, err
-	}
-	device, err := os.OpenFile(devicePath, os.O_RDWR, 0)
-	if err != nil {
-		return nil, nil, err
-	}
-	return pty, device, nil
+	_ = "STUB: not implemented"
+	return *new(containerd.Console), nil, nil
 }
 
 // MatchPty checks that the output matches the expected strings in specified
 // order.
 func MatchPty(pty containerd.Console, device *os.File, expected ...string) error {
-	var wg sync.WaitGroup
-	wg.Add(1)
-	var buffer bytes.Buffer
-	go func() {
-		defer wg.Done()
-		_, _ = io.Copy(&buffer, pty)
-	}()
-	_ = device.Close()
-	wg.Wait()
-
-	return OrderedMatch(buffer.String(), expected...)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // OrderedMatch matches the got with the expected strings in order.
-func OrderedMatch(got string, want ...string) error {
-	for _, e := range want {
-		i := strings.Index(got, e)
-		if i < 0 {
-			return fmt.Errorf("failed to find %q in %q", e, got)
-		}
-		got = got[i+len(e):]
-	}
-	return nil
-}
+func OrderedMatch(got string, want ...string) error { _ = "STUB: not implemented"; return nil }

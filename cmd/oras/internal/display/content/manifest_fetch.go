@@ -16,12 +16,9 @@ limitations under the License.
 package content
 
 import (
-	"fmt"
 	"io"
-	"os"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // manifestFetch handles raw content output.
@@ -32,31 +29,13 @@ type manifestFetch struct {
 }
 
 func (h *manifestFetch) OnContentFetched(_ ocispec.Descriptor, manifest []byte) (eventErr error) {
-	out := h.stdout
-	if h.outputPath != "-" && h.outputPath != "" {
-		f, err := os.Create(h.outputPath)
-		if err != nil {
-			return fmt.Errorf("failed to open %q: %w", h.outputPath, err)
-		}
-		defer func() {
-			if err := f.Close(); eventErr == nil {
-				eventErr = err
-			}
-		}()
-		out = f
-	}
-	return output.PrintJSON(out, manifest, h.pretty)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // NewManifestFetchHandler creates a new handler.
 func NewManifestFetchHandler(out io.Writer, pretty bool, outputPath string) ManifestFetchHandler {
+	_ = "STUB: not implemented"
 	// ignore --pretty when output to a file
-	if outputPath != "" && outputPath != "-" {
-		pretty = false
-	}
-	return &manifestFetch{
-		pretty:     pretty,
-		stdout:     out,
-		outputPath: outputPath,
-	}
+	return *new(ManifestFetchHandler)
 }

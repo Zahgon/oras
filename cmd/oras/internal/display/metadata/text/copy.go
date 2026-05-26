@@ -30,23 +30,21 @@ type CopyHandler struct {
 
 // NewCopyHandler returns a new handler for cp events.
 func NewCopyHandler(printer *output.Printer) metadata.CopyHandler {
-	return &CopyHandler{
-		printer: printer,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.CopyHandler)
 }
 
 // OnTagged implements metadata.TaggedHandler.
 func (h *CopyHandler) OnTagged(_ ocispec.Descriptor, tag string) error {
-	return h.printer.Println("Tagged", tag)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Render implements metadata.Renderer.
-func (h *CopyHandler) Render() error {
-	return h.printer.Println("Digest:", h.desc.Digest)
-}
+func (h *CopyHandler) Render() error { _ = "STUB: not implemented"; return nil }
 
 // OnCopied implements metadata.CopyHandler.
 func (h *CopyHandler) OnCopied(target *option.BinaryTarget, desc ocispec.Descriptor) error {
-	h.desc = desc
-	return h.printer.Println("Copied", target.From.GetDisplayReference(), "=>", target.To.GetDisplayReference())
+	_ = "STUB: not implemented"
+	return nil
 }

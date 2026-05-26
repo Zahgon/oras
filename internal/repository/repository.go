@@ -15,30 +15,8 @@ limitations under the License.
 
 package repository
 
-import (
-	"fmt"
-	"strings"
-
-	"oras.land/oras-go/v2/registry"
-)
-
 // ParseRemoteRepository extracts hostname and namespace from rawReference.
 func ParseRemoteRepository(rawReference string) (hostname, namespace string, err error) {
-	rawReference = strings.TrimSuffix(rawReference, "/")
-	if strings.Contains(rawReference, "/") {
-		var ref registry.Reference
-		ref, err = registry.ParseReference(rawReference)
-		if err != nil {
-			return
-		}
-		if ref.Reference != "" {
-			err = fmt.Errorf("tags or digests should not be provided")
-			return
-		}
-		hostname = ref.Registry
-		namespace = ref.Repository + "/"
-	} else {
-		hostname = rawReference
-	}
-	return
+	_ = "STUB: not implemented"
+	return "", "", nil
 }

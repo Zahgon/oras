@@ -16,11 +16,6 @@ limitations under the License.
 package trace
 
 import (
-	"bytes"
-	"fmt"
-	"strings"
-	"time"
-
 	"github.com/sirupsen/logrus"
 )
 
@@ -32,19 +27,8 @@ const logEntrySeperator = "\n\n" // two empty lines
 
 // Format renders a single log entry.
 func (f *TextFormatter) Format(entry *logrus.Entry) ([]byte, error) {
-	var buf bytes.Buffer
-
-	timestamp := entry.Time.Format(time.RFC3339Nano)
-	levelText := strings.ToUpper(entry.Level.String())
-	fmt.Fprintf(&buf, "[%s][%s]: %s\n", timestamp, levelText, entry.Message)
-	// print data fields
-	if len(entry.Data) > 0 {
-		buf.WriteString("[Data]:\n")
-		for k, v := range entry.Data {
-			fmt.Fprintf(&buf, "  %s=%v\n", k, v)
-		}
-	}
-
-	buf.WriteString(logEntrySeperator)
-	return buf.Bytes(), nil
+	_ = "STUB: not implemented"
+	return nil, nil
 }
+
+// print data fields

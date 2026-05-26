@@ -22,8 +22,6 @@ import (
 	"oras.land/oras/cmd/oras/internal/display/metadata"
 	"oras.land/oras/cmd/oras/internal/display/metadata/model"
 	"oras.land/oras/cmd/oras/internal/option"
-	"oras.land/oras/cmd/oras/internal/output"
-	"oras.land/oras/internal/contentutil"
 )
 
 // PushHandler handles go-template metadata output for push events.
@@ -37,29 +35,21 @@ type PushHandler struct {
 
 // NewPushHandler returns a new handler for push events.
 func NewPushHandler(out io.Writer, template string) metadata.PushHandler {
-	return &PushHandler{
-		out:      out,
-		template: template,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.PushHandler)
 }
 
 // OnTagged implements metadata.TaggedHandler.
 func (ph *PushHandler) OnTagged(_ ocispec.Descriptor, tag string) error {
-	ph.tagged.AddTag(tag)
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // OnCopied is called after files are copied.
 func (ph *PushHandler) OnCopied(opts *option.Target, root ocispec.Descriptor) error {
-	if opts.RawReference != "" && !contentutil.IsDigest(opts.Reference) {
-		ph.tagged.AddTag(opts.Reference)
-	}
-	ph.path = opts.Path
-	ph.root = root
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // Render implements PushHandler.
-func (ph *PushHandler) Render() error {
-	return output.ParseAndWrite(ph.out, model.NewPush(ph.root, ph.path, ph.tagged.Tags()), ph.template)
-}
+func (ph *PushHandler) Render() error { _ = "STUB: not implemented"; return nil }

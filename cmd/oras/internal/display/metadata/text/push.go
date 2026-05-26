@@ -33,29 +33,21 @@ type PushHandler struct {
 
 // NewPushHandler returns a new handler for push events.
 func NewPushHandler(printer *output.Printer) metadata.PushHandler {
-	return &PushHandler{
-		printer: printer,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.PushHandler)
 }
 
 // OnTagged implements metadata.TaggedHandler.
 func (h *PushHandler) OnTagged(_ ocispec.Descriptor, tag string) error {
-	h.tagLock.Lock()
-	defer h.tagLock.Unlock()
-	return h.printer.Println("Tagged", tag)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // OnCopied is called after files are copied.
 func (h *PushHandler) OnCopied(opts *option.Target, root ocispec.Descriptor) error {
-	h.root = root
-	return h.printer.Println("Pushed", opts.GetDisplayReference())
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Render implements PushHandler.
-func (h *PushHandler) Render() error {
-	err := h.printer.Println("ArtifactType:", h.root.ArtifactType)
-	if err != nil {
-		return err
-	}
-	return h.printer.Println("Digest:", h.root.Digest)
-}
+func (h *PushHandler) Render() error { _ = "STUB: not implemented"; return nil }

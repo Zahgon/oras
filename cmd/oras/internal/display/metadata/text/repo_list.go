@@ -17,7 +17,6 @@ package text
 
 import (
 	"io"
-	"strings"
 
 	"oras.land/oras/cmd/oras/internal/display/metadata"
 )
@@ -30,23 +29,16 @@ type repoListHandler struct {
 
 // NewRepoListHandler creates a new text handler for repo ls command.
 func NewRepoListHandler(out io.Writer, namespace string) metadata.RepoListHandler {
-	return &repoListHandler{
-		out:       out,
-		namespace: namespace,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.RepoListHandler)
 }
 
 // OnRepositoryListed implements metadata.RepoListHandler.
 func (h *repoListHandler) OnRepositoryListed(repo string) error {
+	_ = "STUB: not implemented"
 	// For text format, show only the sub repo (without the namespace prefix) for better readability
-	if h.namespace != "" {
-		repo = strings.TrimPrefix(repo, h.namespace)
-	}
-	_, err := io.WriteString(h.out, repo+"\n")
-	return err
+	return nil
 }
 
 // Render implements metadata.RepoListHandler.
-func (h *repoListHandler) Render() error {
-	return nil
-}
+func (h *repoListHandler) Render() error { _ = "STUB: not implemented"; return nil }

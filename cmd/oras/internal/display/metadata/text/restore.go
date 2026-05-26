@@ -16,10 +16,8 @@ limitations under the License.
 package text
 
 import (
-	"strings"
 	"time"
 
-	"oras.land/oras/cmd/oras/internal/display/status/progress/humanize"
 	"oras.land/oras/cmd/oras/internal/output"
 )
 
@@ -31,55 +29,34 @@ type RestoreHandler struct {
 
 // NewRestoreHandler creates a new RestoreHandler.
 func NewRestoreHandler(printer *output.Printer, dryRun bool) *RestoreHandler {
-	return &RestoreHandler{
-		printer: printer,
-		dryRun:  dryRun,
-	}
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // OnTarLoaded implements metadata.RestoreHandler.
 func (rh *RestoreHandler) OnTarLoaded(path string, size int64) error {
-	return rh.printer.Printf("Loaded backup archive: %s (%s)\n", path, humanize.ToBytes(size))
-}
-
-// OnTagsFound implements metadata.RestoreHandler.
-func (rh *RestoreHandler) OnTagsFound(tags []string) error {
-	if len(tags) == 0 {
-		return rh.printer.Printf("No tags found in the backup\n")
-	}
-	if len(tags) <= 5 {
-		// print small number of tags in one line
-		return rh.printer.Printf("Found %d tag(s) in the backup: %s\n", len(tags), strings.Join(tags, ", "))
-	}
-	// print large number of tags line by line
-	if err := rh.printer.Printf("Found %d tag(s) in the backup:\n", len(tags)); err != nil {
-		return err
-	}
-	for _, tag := range tags {
-		if err := rh.printer.Println(tag); err != nil {
-			return err
-		}
-	}
+	_ = "STUB: not implemented"
 	return nil
 }
 
+// OnTagsFound implements metadata.RestoreHandler.
+func (rh *RestoreHandler) OnTagsFound(tags []string) error { _ = "STUB: not implemented"; return nil }
+
+// print small number of tags in one line
+
+// print large number of tags line by line
+
 // OnArtifactPushed implements metadata.RestoreHandler.
 func (rh *RestoreHandler) OnArtifactPushed(tag string, referrerCount int) error {
-	if rh.dryRun {
-		return rh.printer.Printf("Dry run: would push tag %s with %d referrer(s)\n", tag, referrerCount)
-	}
-	return rh.printer.Printf("Pushed tag %s with %d referrer(s)\n", tag, referrerCount)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // OnRestoreCompleted implements metadata.RestoreHandler.
 func (rh *RestoreHandler) OnRestoreCompleted(tagsCount int, repo string, duration time.Duration) error {
-	if rh.dryRun {
-		return rh.printer.Printf("Dry run complete: %d tag(s) would be restored to %q (no data pushed)\n", tagsCount, repo)
-	}
-	return rh.printer.Printf("Successfully restored %d tag(s) to %q in %s\n", tagsCount, repo, humanize.FormatDuration(duration))
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Render implements metadata.RestoreHandler.
-func (rh *RestoreHandler) Render() error {
-	return nil
-}
+func (rh *RestoreHandler) Render() error { _ = "STUB: not implemented"; return nil }

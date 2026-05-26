@@ -20,7 +20,6 @@ import (
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	"golang.org/x/term"
 )
 
 const NoTTYFlag = "no-tty"
@@ -34,22 +33,12 @@ type Terminal struct {
 }
 
 // ApplyFlags applies flags to a command flag set.
-func (opts *Terminal) ApplyFlags(fs *pflag.FlagSet) {
-	fs.BoolVarP(&opts.noTTY, NoTTYFlag, "", false, "[Preview] disable progress bars")
-}
+func (opts *Terminal) ApplyFlags(fs *pflag.FlagSet) { _ = "STUB: not implemented"; return }
 
 // Parse parses the input notty flag.
-func (opts *Terminal) Parse(cmd *cobra.Command) error {
-	opts.ttyEnforced = cmd.Flags().Changed(NoTTYFlag) && !opts.noTTY
-	// use STDERR as TTY output since STDOUT is reserved for pipeable output
-	if !opts.noTTY {
-		f := os.Stderr
-		if term.IsTerminal(int(f.Fd())) {
-			opts.TTY = f
-		}
-	}
-	return nil
-}
+func (opts *Terminal) Parse(cmd *cobra.Command) error { _ = "STUB: not implemented"; return nil }
+
+// use STDERR as TTY output since STDOUT is reserved for pipeable output
 
 // DisableTTY updates the TTY value, given the status of --debug flag, --no-tty flag and output
 // path value.TTY value is set to nil if
@@ -57,8 +46,4 @@ func (opts *Terminal) Parse(cmd *cobra.Command) error {
 // 2. --debug flag is used
 // 3. output path is set to stdout and --no-tty flag is not explicitly set to false
 // (i.e. not --no-tty=false)
-func (opts *Terminal) DisableTTY(debugEnabled, toSTDOUT bool) {
-	if debugEnabled || opts.noTTY || (toSTDOUT && !opts.ttyEnforced) {
-		opts.TTY = nil
-	}
-}
+func (opts *Terminal) DisableTTY(debugEnabled, toSTDOUT bool) { _ = "STUB: not implemented"; return }

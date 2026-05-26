@@ -16,9 +16,6 @@ limitations under the License.
 package text
 
 import (
-	"fmt"
-	"strings"
-
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"oras.land/oras/cmd/oras/internal/display/metadata"
 	"oras.land/oras/cmd/oras/internal/option"
@@ -34,29 +31,17 @@ type AttachHandler struct {
 
 // NewAttachHandler returns a new handler for attach events.
 func NewAttachHandler(printer *output.Printer) metadata.AttachHandler {
-	return &AttachHandler{
-		printer: printer,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.AttachHandler)
 }
 
 // OnAttached implements AttachHandler.
 func (ah *AttachHandler) OnAttached(target *option.Target, root ocispec.Descriptor, subject ocispec.Descriptor) {
-	ah.root = root
-	if strings.HasSuffix(target.RawReference, subject.Digest.String()) {
-		ah.subjectDisplayReference = target.GetDisplayReference()
-	} else {
-		// use subject digest instead of tag
-		newTarget := *target
-		newTarget.RawReference = fmt.Sprintf("%s@%s", target.Path, subject.Digest)
-		ah.subjectDisplayReference = newTarget.GetDisplayReference()
-	}
+	_ = "STUB: not implemented"
+	return
 }
 
+// use subject digest instead of tag
+
 // Render is called when the attach command is complete.
-func (ah *AttachHandler) Render() error {
-	err := ah.printer.Println("Attached to", ah.subjectDisplayReference)
-	if err != nil {
-		return err
-	}
-	return ah.printer.Println("Digest:", ah.root.Digest)
-}
+func (ah *AttachHandler) Render() error { _ = "STUB: not implemented"; return nil }

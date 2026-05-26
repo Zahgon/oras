@@ -16,66 +16,11 @@ limitations under the License.
 package root
 
 import (
-	"fmt"
-	"os"
-	"runtime"
-	"strings"
-
 	"github.com/spf13/cobra"
 
 	"oras.land/oras/cmd/oras/internal/output"
-	"oras.land/oras/internal/version"
 )
 
-func versionCmd() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "version",
-		Short: "Show the oras version information",
-		Long: `Show the oras version information
+func versionCmd() *cobra.Command { _ = "STUB: not implemented"; return nil }
 
-Example - print version:
-  oras version
-`,
-		Args: func(_ *cobra.Command, args []string) error {
-			if len(args) != 0 {
-				_, err := fmt.Fprintf(os.Stderr, "warning: `oras version` requires no argument, %q will be ignored\n", strings.Join(args, ","))
-				if err != nil {
-					return err
-				}
-			}
-			return nil
-		},
-		RunE: func(cmd *cobra.Command, _ []string) error {
-			printer := output.NewPrinter(cmd.OutOrStdout(), cmd.ErrOrStderr())
-			return runVersion(printer)
-		},
-	}
-
-	return cmd
-}
-
-func runVersion(printer *output.Printer) error {
-	items := [][]string{
-		{"Version", version.GetVersion()},
-		{"Go version", runtime.Version()},
-		{"OS/Arch", fmt.Sprintf("%s/%s", runtime.GOOS, runtime.GOARCH)},
-	}
-	if version.GitCommit != "" {
-		items = append(items, []string{"Git commit", version.GitCommit})
-	}
-	if version.GitTreeState != "" {
-		items = append(items, []string{"Git tree state", version.GitTreeState})
-	}
-
-	size := 0
-	for _, item := range items {
-		if length := len(item[0]); length > size {
-			size = length
-		}
-	}
-	for _, item := range items {
-		_ = printer.Println(item[0] + ": " + strings.Repeat(" ", size-len(item[0])) + item[1])
-	}
-
-	return nil
-}
+func runVersion(printer *output.Printer) error { _ = "STUB: not implemented"; return nil }

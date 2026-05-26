@@ -17,21 +17,6 @@ package manifest
 
 import (
 	"github.com/spf13/cobra"
-	"oras.land/oras/cmd/oras/root/manifest/index"
 )
 
-func Cmd() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "manifest [command]",
-		Short: "Manifest operations",
-	}
-
-	cmd.AddCommand(
-		deleteCmd(),
-		fetchCmd(),
-		fetchConfigCmd(),
-		pushCmd(),
-		index.Cmd(),
-	)
-	return cmd
-}
+func Cmd() *cobra.Command { _ = "STUB: not implemented"; return nil }

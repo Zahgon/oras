@@ -16,7 +16,6 @@ limitations under the License.
 package manifest
 
 import (
-	"encoding/json"
 	"errors"
 )
 
@@ -28,15 +27,4 @@ var (
 )
 
 // ExtractMediaType parses the media type field of bytes content in json format.
-func ExtractMediaType(content []byte) (string, error) {
-	var manifest struct {
-		MediaType string `json:"mediaType"`
-	}
-	if err := json.Unmarshal(content, &manifest); err != nil {
-		return "", ErrInvalidJSON
-	}
-	if manifest.MediaType == "" {
-		return "", ErrMediaTypeNotFound
-	}
-	return manifest.MediaType, nil
-}
+func ExtractMediaType(content []byte) (string, error) { _ = "STUB: not implemented"; return "", nil }

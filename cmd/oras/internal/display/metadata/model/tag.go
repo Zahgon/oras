@@ -16,7 +16,6 @@ limitations under the License.
 package model
 
 import (
-	"slices"
 	"sync"
 )
 
@@ -27,17 +26,7 @@ type Tagged struct {
 }
 
 // AddTag adds a tag to the metadata.
-func (tag *Tagged) AddTag(t string) {
-	tag.lock.Lock()
-	defer tag.lock.Unlock()
-
-	tag.tags = append(tag.tags, t)
-}
+func (tag *Tagged) AddTag(t string) { _ = "STUB: not implemented"; return }
 
 // Tags returns the tags.
-func (tag *Tagged) Tags() []string {
-	tag.lock.RLock()
-	defer tag.lock.RUnlock()
-	slices.Sort(tag.tags)
-	return tag.tags
-}
+func (tag *Tagged) Tags() []string { _ = "STUB: not implemented"; return nil }

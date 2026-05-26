@@ -29,22 +29,22 @@ type ManifestIndexCreateHandler struct {
 
 // NewManifestIndexCreateHandler returns a new handler for index create events.
 func NewManifestIndexCreateHandler(printer *output.Printer) metadata.ManifestIndexCreateHandler {
-	return &ManifestIndexCreateHandler{
-		printer: printer,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.ManifestIndexCreateHandler)
 }
 
 // OnTagged implements TaggedHandler.
 func (h *ManifestIndexCreateHandler) OnTagged(_ ocispec.Descriptor, tag string) error {
-	return h.printer.Println("Tagged", tag)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // OnIndexCreated implements ManifestIndexCreateHandler.
 func (h *ManifestIndexCreateHandler) OnIndexCreated(desc ocispec.Descriptor) {
-	h.root = desc
+	_ = "STUB: not implemented"
+
+	// Render implements ManifestIndexCreateHandler.
+	return
 }
 
-// Render implements ManifestIndexCreateHandler.
-func (h *ManifestIndexCreateHandler) Render() error {
-	return h.printer.Println("Digest:", h.root.Digest)
-}
+func (h *ManifestIndexCreateHandler) Render() error { _ = "STUB: not implemented"; return nil }

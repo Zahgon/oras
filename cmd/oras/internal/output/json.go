@@ -16,43 +16,21 @@ limitations under the License.
 package output
 
 import (
-	"bytes"
-	"encoding/json"
-	"fmt"
 	"io"
 )
 
 // PrintPrettyJSON prints the object to the writer in JSON format.
-func PrintPrettyJSON(out io.Writer, object any) error {
-	encoder := json.NewEncoder(out)
-	encoder.SetIndent("", "  ")
-	return encoder.Encode(object)
-}
+func PrintPrettyJSON(out io.Writer, object any) error { _ = "STUB: not implemented"; return nil }
 
 // PrintJSON writes the data to the output stream, optionally prettifying it.
 func PrintJSON(out io.Writer, data []byte, pretty bool) error {
-	if pretty {
-		buf := bytes.NewBuffer(nil)
-		if err := json.Indent(buf, data, "", "  "); err != nil {
-			return fmt.Errorf("failed to prettify: %w", err)
-		}
-		buf.WriteByte('\n')
-		data = buf.Bytes()
-	}
-	_, err := out.Write(data)
-	return err
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // ToMap converts the data to a map[string]any with json tag as key.
 func ToMap(data any) (map[string]any, error) {
+	_ = "STUB: not implemented"
 	// slow but easy
-	content, err := json.Marshal(data)
-	if err != nil {
-		return nil, err
-	}
-	var ret map[string]any
-	if err = json.Unmarshal(content, &ret); err != nil {
-		return nil, err
-	}
-	return ret, nil
+	return nil, nil
 }

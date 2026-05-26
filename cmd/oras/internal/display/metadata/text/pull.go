@@ -34,35 +34,27 @@ type PullHandler struct {
 
 // NewPullHandler returns a new handler for Pull events.
 func NewPullHandler(printer *output.Printer) metadata.PullHandler {
-	return &PullHandler{
-		printer: printer,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.PullHandler)
 }
 
 func (ph *PullHandler) OnFilePulled(_ string, _ string, _ ocispec.Descriptor, _ string) error {
+	_ = "STUB: not implemented"
+
+	// OnLayerSkipped implements metadata.PullHandler.
 	return nil
 }
 
-// OnLayerSkipped implements metadata.PullHandler.
 func (ph *PullHandler) OnLayerSkipped(ocispec.Descriptor) error {
-	ph.layerSkipped.Store(true)
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // OnPulled implements metadata.PullHandler.
 func (ph *PullHandler) OnPulled(target *option.Target, desc ocispec.Descriptor) {
-	ph.target = target
-	ph.root = desc
+	_ = "STUB: not implemented"
+	return
 }
 
 // Render implements metadata.PullHandler.
-func (ph *PullHandler) Render() error {
-	if ph.layerSkipped.Load() {
-		_ = ph.printer.Printf("Skipped pulling layers without file name in %q\n", ocispec.AnnotationTitle)
-		_ = ph.printer.Printf("Use 'oras copy %s --to-oci-layout <layout-dir>' to pull all layers.\n", ph.target.RawReference)
-	} else {
-		_ = ph.printer.Println("Pulled", ph.target.GetDisplayReference())
-		_ = ph.printer.Println("Digest:", ph.root.Digest)
-	}
-	return nil
-}
+func (ph *PullHandler) Render() error { _ = "STUB: not implemented"; return nil }

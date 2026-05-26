@@ -15,35 +15,15 @@ limitations under the License.
 
 package utils
 
-import (
-	"fmt"
-	"strings"
-
-	"github.com/onsi/gomega"
-	"github.com/opencontainers/go-digest"
-	"oras.land/oras-go/v2/registry"
-)
-
 // RegistryRef generates the reference string from given parameters.
 func RegistryRef(reg string, repo string, tagOrDigest string) string {
-	ref := registry.Reference{
-		Registry:   reg,
-		Repository: repo,
-		Reference:  strings.TrimSpace(tagOrDigest),
-	}
-	gomega.Expect(ref.Validate()).ShouldNot(gomega.HaveOccurred())
-	return ref.String()
+	_ = "STUB: not implemented"
+	return ""
 }
 
 // LayoutRef generates the reference string from given parameters.
-func LayoutRef(rootPath string, tagOrDigest string) string {
-	var delimiter string
-	if _, err := digest.Parse(tagOrDigest); err == nil {
-		// digest
-		delimiter = "@"
-	} else {
-		// tag
-		delimiter = ":"
-	}
-	return fmt.Sprintf("%s%s%s", rootPath, delimiter, tagOrDigest)
-}
+func LayoutRef(rootPath string, tagOrDigest string) string { _ = "STUB: not implemented"; return "" }
+
+// digest
+
+// tag

@@ -17,7 +17,6 @@ package net
 
 import (
 	"context"
-	"fmt"
 	"net"
 )
 
@@ -32,17 +31,13 @@ type Dialer struct {
 
 // Add adds an entry for DNS resolve.
 func (d *Dialer) Add(from string, fromPort int, to net.IP, toPort int) {
-	if d.resolve == nil {
-		d.resolve = make(map[string]string)
-	}
-	d.resolve[fmt.Sprintf("%s:%d", from, fromPort)] = fmt.Sprintf("%s:%d", to, toPort)
+	_ = "STUB: not implemented"
+	return
 }
 
 // DialContext connects to the addr on the named network using the provided
 // context.
 func (d *Dialer) DialContext(ctx context.Context, network, addr string) (net.Conn, error) {
-	if resolved, ok := d.resolve[addr]; ok {
-		addr = resolved
-	}
-	return d.BaseDialContext(ctx, network, addr)
+	_ = "STUB: not implemented"
+	return *new(net.Conn), nil
 }

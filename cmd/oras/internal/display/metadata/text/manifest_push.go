@@ -31,24 +31,21 @@ type ManifestPushHandler struct {
 
 // NewManifestPushHandler returns a new handler for manifest push events.
 func NewManifestPushHandler(printer *output.Printer, target *option.Target) metadata.ManifestPushHandler {
-	return &ManifestPushHandler{
-		printer: printer,
-		target:  target,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.ManifestPushHandler)
 }
 
 // OnTagged implements metadata.TaggedHandler.
 func (h *ManifestPushHandler) OnTagged(_ ocispec.Descriptor, tag string) error {
-	return h.printer.Println("Tagged", tag)
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // OnManifestPushed implements metadata.ManifestPushHandler.
 func (h *ManifestPushHandler) OnManifestPushed(desc ocispec.Descriptor) error {
-	h.desc = desc
-	return h.printer.Println("Pushed:", h.target.GetDisplayReference())
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // Render implements metadata.ManifestPushHandler.
-func (h *ManifestPushHandler) Render() error {
-	return h.printer.Println("Digest:", h.desc.Digest)
-}
+func (h *ManifestPushHandler) Render() error { _ = "STUB: not implemented"; return nil }

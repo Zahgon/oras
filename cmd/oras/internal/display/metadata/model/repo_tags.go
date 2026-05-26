@@ -21,13 +21,7 @@ type Tags struct {
 }
 
 // NewTags creates a new Tags model.
-func NewTags() *Tags {
-	return &Tags{
-		Tags: []string{},
-	}
-}
+func NewTags() *Tags { _ = "STUB: not implemented"; return nil }
 
 // AddTag adds a tag to the metadata.
-func (t *Tags) AddTag(tag string) {
-	t.Tags = append(t.Tags, tag)
-}
+func (t *Tags) AddTag(tag string) { _ = "STUB: not implemented"; return }

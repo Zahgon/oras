@@ -17,19 +17,12 @@ package option
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
-	"fmt"
-	"os"
-	"path/filepath"
-	"strings"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"oras.land/oras-go/v2/content"
-	oerrors "oras.land/oras/cmd/oras/internal/errors"
-	"oras.land/oras/cmd/oras/internal/fileref"
 )
 
 // Pre-defined annotation keys for annotation file
@@ -55,76 +48,23 @@ type Packer struct {
 }
 
 // ApplyFlags applies flags to a command flag set.
-func (opts *Packer) ApplyFlags(fs *pflag.FlagSet) {
-	opts.Annotation.ApplyFlags(fs)
-
-	fs.StringVarP(&opts.ManifestExportPath, "export-manifest", "", "", "`path` of the pushed manifest")
-	fs.StringVarP(&opts.AnnotationFilePath, "annotation-file", "", "", "path of the annotation file")
-	fs.BoolVarP(&opts.PathValidationDisabled, "disable-path-validation", "", false, "skip path validation")
-}
+func (opts *Packer) ApplyFlags(fs *pflag.FlagSet) { _ = "STUB: not implemented"; return }
 
 // ExportManifest saves the pushed manifest to a local file.
 func (opts *Packer) ExportManifest(ctx context.Context, fetcher content.Fetcher, desc ocispec.Descriptor) error {
-	if opts.ManifestExportPath == "" {
-		return nil
-	}
-	manifestBytes, err := content.FetchAll(ctx, fetcher, desc)
-	if err != nil {
-		return err
-	}
-	return os.WriteFile(opts.ManifestExportPath, manifestBytes, 0666)
+	_ = "STUB: not implemented"
+	return nil
 }
 
-func (opts *Packer) Parse(cmd *cobra.Command) error {
-	if !opts.PathValidationDisabled {
-		var failedPaths []string
-		for _, path := range opts.FileRefs {
-			// Remove the type if specified in the path <file>[:<type>] format
-			path, _, err := fileref.Parse(path, "")
-			if err != nil {
-				return err
-			}
-			if filepath.IsAbs(path) {
-				failedPaths = append(failedPaths, path)
-			}
-		}
-		if len(failedPaths) > 0 {
-			return fmt.Errorf("%w: %v", errPathValidation, strings.Join(failedPaths, ", "))
-		}
-	}
-	return opts.parseAnnotations(cmd)
-}
+func (opts *Packer) Parse(cmd *cobra.Command) error { _ = "STUB: not implemented"; return nil }
+
+// Remove the type if specified in the path <file>[:<type>] format
 
 // parseAnnotations loads the manifest annotation map.
 func (opts *Packer) parseAnnotations(cmd *cobra.Command) error {
-	if opts.AnnotationFilePath != "" && len(opts.ManifestAnnotations) != 0 {
-		return errAnnotationConflict
-	}
-	if opts.AnnotationFilePath != "" {
-		if err := decodeJSON(opts.AnnotationFilePath, &opts.Annotations); err != nil {
-			return &oerrors.Error{
-				Err:            fmt.Errorf(`invalid annotation json file: failed to load annotations from %s`, opts.AnnotationFilePath),
-				Recommendation: `Annotation file doesn't match the required format. Please refer to the document at https://oras.land/docs/how_to_guides/manifest_annotations`,
-			}
-		}
-	}
-	if len(opts.ManifestAnnotations) != 0 {
-		return opts.Annotation.Parse(cmd)
-	}
+	_ = "STUB: not implemented"
 	return nil
 }
 
 // decodeJSON decodes file contents into json.
-func decodeJSON(filename string, v any) (err error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return err
-	}
-	defer func() {
-		closeErr := file.Close()
-		if err == nil {
-			err = closeErr
-		}
-	}()
-	return json.NewDecoder(file).Decode(v)
-}
+func decodeJSON(filename string, v any) (err error) { _ = "STUB: not implemented"; return nil }

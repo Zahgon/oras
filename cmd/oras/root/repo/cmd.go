@@ -19,16 +19,4 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func Cmd() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:     "repo [command]",
-		Short:   "Repository operations",
-		Aliases: []string{"repository"},
-	}
-
-	cmd.AddCommand(
-		listCmd(),
-		showTagsCmd(),
-	)
-	return cmd
-}
+func Cmd() *cobra.Command { _ = "STUB: not implemented"; return nil }

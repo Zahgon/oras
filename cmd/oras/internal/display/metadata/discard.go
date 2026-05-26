@@ -24,33 +24,45 @@ type Discard struct{}
 
 // NewDiscardHandler creates a new handler that discards output for all events.
 func NewDiscardHandler() Discard {
-	return Discard{}
+	_ = "STUB: not implemented"
+
+	// OnFetched implements ManifestFetchHandler.
+	return *new(Discard)
 }
 
-// OnFetched implements ManifestFetchHandler.
 func (Discard) OnFetched(string, ocispec.Descriptor, []byte) error {
+	_ = "STUB: not implemented"
+
+	// OnManifestPushed implements ManifestPushHandler.
 	return nil
 }
 
-// OnManifestPushed implements ManifestPushHandler.
 func (Discard) OnManifestPushed(ocispec.Descriptor) error {
+	_ = "STUB: not implemented"
+
+	// Render implements ManifestPushHandler.
 	return nil
 }
 
-// Render implements ManifestPushHandler.
 func (Discard) Render() error {
+	_ = "STUB: not implemented"
+
+	// OnTagged implements ManifestIndexCreateHandler.
 	return nil
 }
 
-// OnTagged implements ManifestIndexCreateHandler.
 func (Discard) OnTagged(ocispec.Descriptor, string) error {
+	_ = "STUB: not implemented"
+
+	// OnIndexCreated implements ManifestIndexCreateHandler.
 	return nil
 }
 
-// OnIndexCreated implements ManifestIndexCreateHandler.
-func (Discard) OnIndexCreated(ocispec.Descriptor) {}
+func (Discard) OnIndexCreated(ocispec.Descriptor) {
+	_ = "STUB: not implemented"
 
-// OnBlobPushed implements BlobPushHandler
-func (Discard) OnBlobPushed(*option.Target) error {
-	return nil
+	// OnBlobPushed implements BlobPushHandler
+	return
 }
+
+func (Discard) OnBlobPushed(*option.Target) error { _ = "STUB: not implemented"; return nil }

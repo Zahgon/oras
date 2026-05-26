@@ -16,10 +16,6 @@ limitations under the License.
 package match
 
 import (
-	"fmt"
-	"strings"
-
-	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega/gbytes"
 )
 
@@ -29,23 +25,9 @@ import (
 type keywordMatcher []string
 
 func NewKeywordMatcher(kw []string) keywordMatcher {
-	return keywordMatcher(kw)
+	_ = "STUB: not implemented"
+	return *new(keywordMatcher)
 }
 
 // Match matches got with wanted keywords.
-func (want keywordMatcher) Match(got *gbytes.Buffer) {
-	var missed []string
-
-	raw := string(got.Contents())
-	lowered := strings.ToLower(raw)
-	for _, w := range want {
-		if !strings.Contains(lowered, strings.ToLower(w)) {
-			missed = append(missed, w)
-		}
-	}
-
-	if len(missed) != 0 {
-		fmt.Printf("Keywords missed: %v\n", missed)
-		ginkgo.Fail("failed to match all keywords")
-	}
-}
+func (want keywordMatcher) Match(got *gbytes.Buffer) { _ = "STUB: not implemented"; return }

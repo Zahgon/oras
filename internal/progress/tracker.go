@@ -16,7 +16,6 @@ limitations under the License.
 package progress
 
 import (
-	"errors"
 	"io"
 )
 
@@ -39,48 +38,30 @@ type TrackerFunc func(status Status, err error) error
 
 // Close closes the tracker.
 func (f TrackerFunc) Close() error {
+	_ = "STUB: not implemented"
+
+	// Update updates the status of the descriptor.
 	return nil
 }
 
-// Update updates the status of the descriptor.
-func (f TrackerFunc) Update(status Status) error {
-	return f(status, nil)
-}
+func (f TrackerFunc) Update(status Status) error { _ = "STUB: not implemented"; return nil }
 
 // Fail marks the descriptor as failed.
-func (f TrackerFunc) Fail(err error) error {
-	return f(Status{}, err)
-}
+func (f TrackerFunc) Fail(err error) error { _ = "STUB: not implemented"; return nil }
 
 // Start starts tracking the transmission.
-func Start(t Tracker) error {
-	return t.Update(Status{
-		State:  StateInitialized,
-		Offset: -1,
-	})
-}
+func Start(t Tracker) error { _ = "STUB: not implemented"; return nil }
 
 // Done marks the transmission as complete.
 // Done should be called after the transmission is complete.
 // Note: Reading all content from the reader does not imply the transmission is
 // complete.
-func Done(t Tracker) error {
-	return t.Update(Status{
-		State:  StateTransmitted,
-		Offset: -1,
-	})
-}
+func Done(t Tracker) error { _ = "STUB: not implemented"; return nil }
 
 // TrackReader bind a reader with a tracker.
 func TrackReader(t Tracker, r io.Reader) io.Reader {
-	rt := readTracker{
-		base:    r,
-		tracker: t,
-	}
-	if _, ok := r.(io.WriterTo); ok {
-		return &readTrackerWriteTo{rt}
-	}
-	return &rt
+	_ = "STUB: not implemented"
+	return *new(io.Reader)
 }
 
 // readTracker tracks the transmission based on the read operation.
@@ -93,24 +74,7 @@ type readTracker struct {
 // Read reads from the base reader and updates the status.
 // On partial read, the tracker treats it as two reads: a successful read with
 // status update and a failed read with failure report.
-func (rt *readTracker) Read(p []byte) (int, error) {
-	n, err := rt.base.Read(p)
-	rt.offset += int64(n)
-	if n > 0 {
-		if updateErr := rt.tracker.Update(Status{
-			State:  StateTransmitting,
-			Offset: rt.offset,
-		}); updateErr != nil {
-			err = updateErr
-		}
-	}
-	if err != nil && !errors.Is(err, io.EOF) {
-		if failErr := rt.tracker.Fail(err); failErr != nil {
-			return n, failErr
-		}
-	}
-	return n, err
-}
+func (rt *readTracker) Read(p []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }
 
 // readTrackerWriteTo is readTracker with WriteTo support.
 type readTrackerWriteTo struct {
@@ -121,19 +85,8 @@ type readTrackerWriteTo struct {
 // On partial write, the tracker treats it as two writes: a successful write
 // with status update and a failed write with failure report.
 func (rt *readTrackerWriteTo) WriteTo(w io.Writer) (int64, error) {
-	wt := &writeTracker{
-		base:    w,
-		tracker: rt.tracker,
-		offset:  rt.offset,
-	}
-	n, err := rt.base.(io.WriterTo).WriteTo(wt)
-	rt.offset = wt.offset
-	if err != nil && wt.trackerErr == nil {
-		if failErr := rt.tracker.Fail(err); failErr != nil {
-			return n, failErr
-		}
-	}
-	return n, err
+	_ = "STUB: not implemented"
+	return 0, nil
 }
 
 // writeTracker tracks the transmission based on the write operation.
@@ -147,23 +100,4 @@ type writeTracker struct {
 // Write writes to the base writer and updates the status.
 // On partial write, the tracker treats it as two writes: a successful write
 // with status update and a failed write with failure report.
-func (wt *writeTracker) Write(p []byte) (int, error) {
-	n, err := wt.base.Write(p)
-	wt.offset += int64(n)
-	if n > 0 {
-		if updateErr := wt.tracker.Update(Status{
-			State:  StateTransmitting,
-			Offset: wt.offset,
-		}); updateErr != nil {
-			wt.trackerErr = updateErr
-			err = updateErr
-		}
-	}
-	if err != nil {
-		if failErr := wt.tracker.Fail(err); failErr != nil {
-			wt.trackerErr = failErr
-			return n, failErr
-		}
-	}
-	return n, err
-}
+func (wt *writeTracker) Write(p []byte) (int, error) { _ = "STUB: not implemented"; return 0, nil }

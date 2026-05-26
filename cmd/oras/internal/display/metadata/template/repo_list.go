@@ -20,7 +20,6 @@ import (
 
 	"oras.land/oras/cmd/oras/internal/display/metadata"
 	"oras.land/oras/cmd/oras/internal/display/metadata/model"
-	"oras.land/oras/cmd/oras/internal/output"
 )
 
 // repoListHandler handles template metadata output for repo ls command.
@@ -32,21 +31,16 @@ type repoListHandler struct {
 
 // NewRepoListHandler creates a new template handler for repo ls command.
 func NewRepoListHandler(out io.Writer, tmpl string, registry string) metadata.RepoListHandler {
-	return &repoListHandler{
-		out:      out,
-		model:    model.NewRepositories(registry),
-		template: tmpl,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.RepoListHandler)
 }
 
 // OnRepositoryListed implements metadata.RepoListHandler.
 func (h *repoListHandler) OnRepositoryListed(repo string) error {
+	_ = "STUB: not implemented"
 	// For Go-template format, show the full repository name
-	h.model.AddRepository(repo)
 	return nil
 }
 
 // Render implements metadata.RepoListHandler.
-func (h *repoListHandler) Render() error {
-	return output.ParseAndWrite(h.out, h.model, h.template)
-}
+func (h *repoListHandler) Render() error { _ = "STUB: not implemented"; return nil }

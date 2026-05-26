@@ -16,18 +16,10 @@ limitations under the License.
 package main
 
 import (
-	"context"
 	"os"
-	"os/signal"
-
-	"oras.land/oras/cmd/oras/root"
 )
 
-func run() error {
-	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
-	defer cancel()
-	return root.New().ExecuteContext(ctx)
-}
+func run() error { _ = "STUB: not implemented"; return nil }
 
 func main() {
 	if err := run(); err != nil {

@@ -29,18 +29,12 @@ type BlobDeleteHandler struct {
 
 // NewBlobDeleteHandler returns a new handler for blob delete events.
 func NewBlobDeleteHandler(printer *output.Printer, target *option.Target) metadata.BlobDeleteHandler {
-	return &BlobDeleteHandler{
-		printer: printer,
-		target:  target,
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.BlobDeleteHandler)
 }
 
 // OnBlobMissing implements BlobDeleteHandler.
-func (h *BlobDeleteHandler) OnBlobMissing() error {
-	return h.printer.Println("Missing", h.target.RawReference)
-}
+func (h *BlobDeleteHandler) OnBlobMissing() error { _ = "STUB: not implemented"; return nil }
 
 // OnBlobDeleted implements BlobDeleteHandler.
-func (h *BlobDeleteHandler) OnBlobDeleted() error {
-	return h.printer.Println("Deleted", h.target.GetDisplayReference())
-}
+func (h *BlobDeleteHandler) OnBlobDeleted() error { _ = "STUB: not implemented"; return nil }

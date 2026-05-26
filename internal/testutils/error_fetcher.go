@@ -17,7 +17,6 @@ package testutils
 
 import (
 	"context"
-	"fmt"
 	"io"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
@@ -29,13 +28,10 @@ type ErrorFetcher struct {
 }
 
 // NewErrorFetcher create and error fetcher
-func NewErrorFetcher() *ErrorFetcher {
-	return &ErrorFetcher{
-		ExpectedError: fmt.Errorf("expected error"),
-	}
-}
+func NewErrorFetcher() *ErrorFetcher { _ = "STUB: not implemented"; return nil }
 
 // Fetch returns an error.
 func (f *ErrorFetcher) Fetch(context.Context, ocispec.Descriptor) (io.ReadCloser, error) {
-	return nil, f.ExpectedError
+	_ = "STUB: not implemented"
+	return *new(io.ReadCloser), nil
 }

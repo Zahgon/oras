@@ -16,64 +16,28 @@ limitations under the License.
 package io
 
 import (
-	"archive/tar"
-	"bytes"
-	"errors"
-	"fmt"
 	"io"
-	"os"
-	"path/filepath"
-	"strings"
 )
 
 // TarDirectory creates a tar archive from the contents of sourceDir and writes it to the given writer.
 func TarDirectory(writer io.Writer, sourceDir string) (tarErr error) {
+	_ = "STUB: not implemented"
 	// Ensure sourceDir exists and is a directory
-	fi, err := os.Stat(sourceDir)
-	if err != nil {
-		return fmt.Errorf("failed to stat source directory: %w", err)
-	}
-	if !fi.IsDir() {
-		return fmt.Errorf("source is not a directory: %s", sourceDir)
-	}
-
-	// Create a new tar writer
-	tw := tar.NewWriter(writer)
-	defer func() {
-		closeErr := tw.Close()
-		if tarErr == nil {
-			tarErr = closeErr
-		}
-	}()
-
-	return tw.AddFS(os.DirFS(sourceDir))
+	return nil
 }
+
+// Create a new tar writer
 
 // IsTarFile loosely checks whether the given file path refers to a tar archive
 // by examining its extension and magic number.
 func IsTarFile(path string) (bool, error) {
+	_ = "STUB: not implemented"
 	// loose check: consider *.tar files as tar archives
-	if strings.EqualFold(filepath.Ext(path), ".tar") {
-		return true, nil
-	}
-
-	// check the magic number to determine the file type
-	fp, err := os.Open(path)
-	if err != nil {
-		return false, fmt.Errorf("failed to open file %q: %w", path, err)
-	}
-	defer func() {
-		_ = fp.Close()
-	}()
-
-	// read 5 bytes ("ustar") at the position where the magic number is located
-	magic := make([]byte, 5)
-	_, err = fp.ReadAt(magic, 257) // ustar magic number starts at byte 257
-	if err != nil {
-		if errors.Is(err, io.EOF) {
-			return false, nil
-		}
-		return false, fmt.Errorf("failed to read magic number from file %q: %w", path, err)
-	}
-	return bytes.Equal(magic, []byte("ustar")), nil
+	return false, nil
 }
+
+// check the magic number to determine the file type
+
+// read 5 bytes ("ustar") at the position where the magic number is located
+
+// ustar magic number starts at byte 257

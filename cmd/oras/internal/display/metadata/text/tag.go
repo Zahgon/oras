@@ -16,7 +16,6 @@ limitations under the License.
 package text
 
 import (
-	"fmt"
 	"sync"
 
 	ocispec "github.com/opencontainers/image-spec/specs-go/v1"
@@ -34,22 +33,18 @@ type TagHandler struct {
 
 // NewTagHandler returns a new handler for tag events.
 func NewTagHandler(printer *output.Printer, target option.Target) metadata.TagHandler {
-	return &TagHandler{
-		printer:   printer,
-		refPrefix: fmt.Sprintf("[%s] %s", target.Type, target.Path),
-	}
+	_ = "STUB: not implemented"
+	return *new(metadata.TagHandler)
 }
 
 // OnTagging is called when the tagging is complete.
 func (ah *TagHandler) OnTagging(desc ocispec.Descriptor, _ string) (err error) {
-	ah.printOnce.Do(func() {
-		ref := ah.refPrefix + "@" + desc.Digest.String()
-		err = ah.printer.Println("Tagging", ref)
-	})
-	return err
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // OnTagged is called when the tagging is complete.
 func (ah *TagHandler) OnTagged(_ ocispec.Descriptor, tag string) error {
-	return ah.printer.Println("Tagged", tag)
+	_ = "STUB: not implemented"
+	return nil
 }

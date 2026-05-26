@@ -16,16 +16,10 @@ limitations under the License.
 package utils
 
 import (
-	"fmt"
 	"io"
-	"os"
-	"os/exec"
-	"strings"
 	"time"
 
-	ginkgo "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"github.com/onsi/gomega/gbytes"
 	"github.com/onsi/gomega/gexec"
 	"oras.land/oras/test/e2e/internal/utils/match"
 )
@@ -57,177 +51,97 @@ type ExecOption struct {
 }
 
 // ORAS returns default execution option for oras binary.
-func ORAS(args ...string) *ExecOption {
-	return Binary(orasBinary, args...)
-}
+func ORAS(args ...string) *ExecOption { _ = "STUB: not implemented"; return nil }
 
 // Binary returns default execution option for customized binary.
-func Binary(path string, args ...string) *ExecOption {
-	return &ExecOption{
-		binary:   path,
-		args:     args,
-		timeout:  DefaultTimeout,
-		exitCode: 0,
-	}
-}
+func Binary(path string, args ...string) *ExecOption { _ = "STUB: not implemented"; return nil }
 
 // ExpectFailure sets failure exit code checking for the execution.
 func (opts *ExecOption) ExpectFailure() *ExecOption {
+	_ = "STUB: not implemented"
 	// set to 1 but only check if it's positive
-	opts.exitCode = 1
-	return opts
+	return nil
 }
 
 // ExpectBlocking consistently check if the execution is blocked.
-func (opts *ExecOption) ExpectBlocking() *ExecOption {
-	opts.exitCode = notResponding
-	return opts
-}
+func (opts *ExecOption) ExpectBlocking() *ExecOption { _ = "STUB: not implemented"; return nil }
 
 // WithTimeOut sets timeout for the execution.
 func (opts *ExecOption) WithTimeOut(timeout time.Duration) *ExecOption {
-	opts.timeout = timeout
-	return opts
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // WithDescription sets description text for the execution.
 func (opts *ExecOption) WithDescription(text string) *ExecOption {
-	opts.text = text
-	return opts
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // WithWorkDir sets working directory for the execution.
-func (opts *ExecOption) WithWorkDir(path string) *ExecOption {
-	opts.workDir = path
-	return opts
-}
+func (opts *ExecOption) WithWorkDir(path string) *ExecOption { _ = "STUB: not implemented"; return nil }
 
 // WithInput redirects stdin to r for the execution.
-func (opts *ExecOption) WithInput(r io.Reader) *ExecOption {
-	opts.stdin = r
-	return opts
-}
+func (opts *ExecOption) WithInput(r io.Reader) *ExecOption { _ = "STUB: not implemented"; return nil }
 
 // MatchKeyWords adds keywords matching to stdout.
 func (opts *ExecOption) MatchKeyWords(keywords ...string) *ExecOption {
-	opts.stdout = append(opts.stdout, match.NewKeywordMatcher(keywords))
-	return opts
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MatchErrKeyWords adds keywords matching to stderr.
 func (opts *ExecOption) MatchErrKeyWords(keywords ...string) *ExecOption {
-	opts.stderr = append(opts.stderr, match.NewKeywordMatcher(keywords))
-	return opts
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MatchRequestHeaders adds a debug log matcher that checks for
 // the presence of provided headers in all outgoing HTTP requests.
 func (opts *ExecOption) MatchRequestHeaders(headers ...string) *ExecOption {
-	opts.stderr = append(opts.stderr, match.NewRequestHeaderMatcher("", headers))
-	return opts
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MatchCpRequestHeaders adds a debug log matcher that checks for
 // the presence of specific headers in outgoing copy requests towards
 // the provided host and repository.
 func (opts *ExecOption) MatchCpRequestHeaders(host string, repo string, headers ...string) *ExecOption {
-	urlPrefix := fmt.Sprintf("://%s/v2/%s/", host, repo)
-	opts.stderr = append(opts.stderr, match.NewRequestHeaderMatcher(urlPrefix, headers))
-	return opts
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MatchContent adds full content matching to the execution.
 func (opts *ExecOption) MatchContent(content string) *ExecOption {
-	if opts.exitCode == 0 {
-		opts.stdout = append(opts.stdout, match.NewContentMatcher(content, false))
-	} else {
-		opts.stderr = append(opts.stderr, match.NewContentMatcher(content, false))
-	}
-	return opts
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MatchTrimedContent adds trimmed content matching to the execution.
 func (opts *ExecOption) MatchTrimmedContent(content string) *ExecOption {
-	if opts.exitCode == 0 {
-		opts.stdout = append(opts.stdout, match.NewContentMatcher(content, true))
-	} else {
-		opts.stderr = append(opts.stderr, match.NewContentMatcher(content, true))
-	}
-	return opts
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // MatchStatus adds full content matching to the execution option.
 func (opts *ExecOption) MatchStatus(keys []match.StateKey, verbose bool, successCount int) *ExecOption {
-	opts.stdout = append(opts.stdout, match.NewStatusMatcher(keys, opts.args[0], verbose, successCount))
-	return opts
+	_ = "STUB: not implemented"
+	return nil
 }
 
 // redactArgs returns a copy of args with values following password flags replaced by "***".
-func redactArgs(args []string) []string {
-	redacted := make([]string, len(args))
-	copy(redacted, args)
-	for i, arg := range redacted {
-		if strings.HasPrefix(arg, "--") && strings.Contains(arg, "password") && i+1 < len(redacted) {
-			redacted[i+1] = "***"
-		}
-	}
-	return redacted
-}
+func redactArgs(args []string) []string { _ = "STUB: not implemented"; return nil }
 
 // Exec run the execution based on opts.
 func (opts *ExecOption) Exec() *gexec.Session {
-	if opts == nil {
-		// this should be a code error but can only be caught during runtime
-		panic("Nil option for command execution")
-	}
+	_ = "STUB: not implemented"
 
-	if opts.text == "" {
-		// set default description text
-		switch opts.exitCode {
-		case notResponding:
-			opts.text = "block"
-		case 0:
-			opts.text = "pass"
-		default:
-			opts.text = "fail"
-		}
-	}
-	description := fmt.Sprintf("\n>> should %s: %s %s >>", opts.text, opts.binary, strings.Join(redactArgs(opts.args), " "))
-	ginkgo.By(description)
-
-	var cmd *exec.Cmd
-	if opts.binary == orasBinary {
-		opts.binary = ORASPath
-	}
-	cmd = exec.Command(opts.binary, opts.args...)
-	cmd.Stdin = opts.stdin
-	if opts.workDir != "" {
-		// switch working directory
-		wd, err := os.Getwd()
-		Expect(err).ShouldNot(HaveOccurred())
-		Expect(os.Chdir(opts.workDir)).ShouldNot(HaveOccurred())
-		defer os.Chdir(wd)
-	}
-	session, err := gexec.Start(cmd, os.Stdout, os.Stderr)
-	Expect(err).ShouldNot(HaveOccurred())
-	if opts.exitCode == notResponding {
-		Consistently(session.ExitCode).WithTimeout(opts.timeout).Should(Equal(notResponding))
-		session.Kill()
-	} else {
-		exitCode := session.Wait(opts.timeout).ExitCode()
-		Expect(opts.exitCode == 0).To(Equal(exitCode == 0))
-	}
-
-	// matching result
-	stdout := session.Out.Contents()
-	for _, s := range opts.stdout {
-		s.Match(gbytes.BufferWithBytes(stdout))
-	}
-
-	stderr := session.Err.Contents()
-	for _, s := range opts.stderr {
-		s.Match(gbytes.BufferWithBytes(stderr))
-	}
-
-	return session
+	// this should be a code error but can only be caught during runtime
+	return nil
 }
+
+// set default description text
+
+// switch working directory
+
+// matching result

@@ -36,9 +36,7 @@ import (
 	"oras.land/oras/test/e2e/internal/utils/match"
 )
 
-func restoreTestRepo(text string) string {
-	return fmt.Sprintf("command/restore/%d/%s", GinkgoRandomSeed(), text)
-}
+func restoreTestRepo(text string) string { _ = "STUB: not implemented"; return "" }
 
 var _ = Describe("ORAS beginners:", func() {
 	When("running restore command", func() {

@@ -15,18 +15,8 @@ limitations under the License.
 
 package argument
 
-import "fmt"
-
 // Exactly checks if the number of arguments is exactly cnt.
-func Exactly(cnt int) func(args []string) (bool, string) {
-	return func(args []string) (bool, string) {
-		return len(args) == cnt, fmt.Sprintf("exactly %d argument", cnt)
-	}
-}
+func Exactly(cnt int) func(args []string) (bool, string) { _ = "STUB: not implemented"; return nil }
 
 // AtLeast checks if the number of arguments is larger or equal to cnt.
-func AtLeast(cnt int) func(args []string) (bool, string) {
-	return func(args []string) (bool, string) {
-		return len(args) >= cnt, fmt.Sprintf("at least %d argument", cnt)
-	}
-}
+func AtLeast(cnt int) func(args []string) (bool, string) { _ = "STUB: not implemented"; return nil }

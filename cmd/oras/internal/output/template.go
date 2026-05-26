@@ -17,21 +17,12 @@ package output
 
 import (
 	"io"
-	"text/template"
-
-	"github.com/Masterminds/sprig/v3"
 )
 
 func ParseAndWrite(out io.Writer, object any, templateStr string) error {
+	_ = "STUB: not implemented"
 	// parse template
-	t, err := template.New("format output").Funcs(sprig.FuncMap()).Parse(templateStr)
-	if err != nil {
-		return err
-	}
-	// convert object to map[string]any
-	converted, err := ToMap(object)
-	if err != nil {
-		return err
-	}
-	return t.Execute(out, converted)
+	return nil
 }
+
+// convert object to map[string]any

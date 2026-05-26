@@ -26,9 +26,8 @@ type DigestReference struct {
 
 // NewDigestReference creates a new digest reference.
 func NewDigestReference(name string, digest string) DigestReference {
-	return DigestReference{
-		Reference: name + "@" + digest,
-	}
+	_ = "STUB: not implemented"
+	return *new(DigestReference)
 }
 
 // Descriptor is a descriptor with digest reference.
@@ -41,15 +40,6 @@ type Descriptor struct {
 
 // FromDescriptor converts a OCI descriptor to a descriptor with digest reference.
 func FromDescriptor(name string, desc ocispec.Descriptor) Descriptor {
-	ret := Descriptor{
-		DigestReference: NewDigestReference(name, desc.Digest.String()),
-		Descriptor: ocispec.Descriptor{
-			MediaType:    desc.MediaType,
-			Size:         desc.Size,
-			Digest:       desc.Digest,
-			Annotations:  desc.Annotations,
-			ArtifactType: desc.ArtifactType,
-		},
-	}
-	return ret
+	_ = "STUB: not implemented"
+	return *new(Descriptor)
 }
